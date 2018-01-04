@@ -1,0 +1,32 @@
+<ion-view hide-nav-bar="true">
+  <ion-content class="bg_gray padding-top top0 loginTop" overflow-scroll="false" has-bouncing="true" scrollbar-y="false">
+  	<div class="login_banner">
+  		<img src="img/login_logo.png" width=""/>
+  	</div>
+  	<div class="login_bg_line">
+  		<img src="img/123123.png"/>
+  	</div>
+    <form class="login_form" name="form" ng-submit="login()">
+      <div class="list singleList">
+        <label class="item item-input">
+        		<i class="icon ion-ios-person-outline loginPerson"></i>
+            <input type="text" name="username" ng-keyup="match()" ng-model="loginInfo.loginName"  placeholder="请输入账号" required>
+        </label>
+        <i ng-click="delUsername($event)" ng-show="loginDel" class="icon ion-android-close delUsername"></i>
+        <label class="item item-input login_border0">
+        		<i class="icon ion-ios-locked-outline loginPassword"></i>
+            <input type="password" name="password"  ng-keyup="passwordDelStatus()" ng-model="loginInfo.password" required placeholder="请输入密码">
+        </label>
+        <i ng-click="delPassword()" ng-show="passwordDel" class="icon ion-android-close delPassword"></i>
+      </div>
+      <div class="login_submit_btn login_btn">
+      	<button type="submit" class="button button-block button-light button-positive" ng-disabled="form.$invalid" id="btn_save">登录</button>
+      </div>
+				<ion-checkbox class="login_checkBox" ng-checked="loginCheckBox" ng-click="savebtn()" style="background: #fff;">
+  				记住密码
+  			</ion-checkbox>
+
+
+    </form>
+  </ion-content>
+</ion-view>

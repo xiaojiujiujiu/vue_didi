@@ -1,0 +1,140 @@
+<ion-view view-title="{{title}}">
+  <ion-content class="detail_content">
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>基本信息</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border">
+  			<p>工单号：{{dataDetail.orderBase.code}}</p>
+  			<p>进厂时间：{{dataDetail.orderBase.createTime}}</p>
+  			<p>工单状态：{{dataDetail.orderBase.statusName}}</p>
+  			<p>工单类别：{{dataDetail.orderBase.jobTypeName}}</p>
+  			<p>维修类别：{{dataDetail.orderBase.repairTypeName}}</p>
+  			<p>车牌号：{{dataDetail.orderBase.carLicense}}</p>
+  			<p>车型：<span>{{dataDetail.orderBase.carModelName}}</span></p>
+  			<p>上次保养里程：{{dataDetail.orderBase.lastMaintenanceMileage}}KM</p>
+  			<p>上次进厂里程：{{dataDetail.orderBase.lastMileage}}KM</p>
+  			<p>进厂里程：{{dataDetail.orderBase.mileage}}KM</p>
+  			<p>送修人姓名：{{dataDetail.orderBase.sendPeopleName}}</p>
+  			<p>送修人电话：
+  				<span class="review_list_price" ng-click="callPhone(dataDetail.orderBase.sendPeoplePhone)">{{dataDetail.orderBase.sendPeoplePhone}}</span>
+  				<i class="review_list_price icon ion-ios-telephone-outline" ng-click="callPhone(dataDetail.orderBase.sendPeoplePhone)"></i>
+  			</p>
+  			<p>服务门店：{{dataDetail.orderBase.partyName}}</p>
+  			<p class="detail_content_phone" ng-click="callPhone('{{dataDetail.orderBase.partyPhone}}')">
+  				门店电话：
+  				<span class="review_list_price">{{dataDetail.orderBase.partyPhone}}</span>
+  				<i class="review_list_price icon ion-ios-telephone-outline"></i>
+  			</p>
+  			<p>备注：{{dataDetail.orderBase.note}}</p>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修项目</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div ng-if="dataDetail.projectList.length == 0" style="padding: 10px;">
+  			暂无数据~~
+  		</div>
+  		<div class="review_list_content no-border no-padding">
+  			<div ng-repeat="items in dataDetail.projectList">
+  				<div class="maintenance_items">
+            <span class="item_inde" ng-bind="items.projectIndex"></span>
+	  				<p>
+	  					<span>{{items.projectName}}</span>
+	  					<br />
+	  					<span>工时：{{items.projectManHour}}</span>
+	  				</p>
+	  				<p>
+	  					<span>单价：<span class="review_list_price">¥{{items.projectUpUnitPrice}}</span></span>
+	  					<br />
+	  					<span>工时费：<span class="review_list_price">¥{{items.projectUpUnitTotalMoney}}</span></span>
+	  				</p>
+	  			</div>
+	  			<div class="maintenance_items_hr"></div>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修材料</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div ng-if="dataDetail.goodsList.length == 0" style="padding: 10px;">
+  			暂无数据~~
+  		</div>
+  		<div class="review_list_content no-border no-padding">
+  			<div ng-repeat="items in dataDetail.goodsList">
+  				<div class="maintenance_items_padding">
+  					<span class="maintenance_name">{{items.goodsName}}&nbsp;&nbsp;&nbsp;&nbsp;{{items.goodsBrandName}}&nbsp;&nbsp;&nbsp;&nbsp;{{items.goodsStyle}}</span>
+  				</div>
+  				<div class="maintenance_items_padding">
+  					<span class="maintenance_name">数量：{{items.quantity}}&nbsp;&nbsp;&nbsp;&nbsp;单价：{{items.unitPrice}}&nbsp;&nbsp;&nbsp;&nbsp;金额：{{items.totalMoney}}</span>
+  					<span>{{items.purchaseTypeCN}}</span>
+  				</div>
+	  			<div class="maintenance_items_hr"></div>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>图片</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+			<div ng-if="dataDetail.imageList[0] == null" style="padding: 10px;">
+  			暂无图片~~
+  		</div>
+  		<div class="review_list_content no-border review_list_img_wrap">
+  			<div class="review_list_img" ng-repeat="data in dataDetail.imageList">
+          <img src="{{data.imgUrl}}" ng-click="showBigImage('{{data.imgUrl}}','{{data.imgNote}}')"/>
+          <p class="textAlignCenter" ng-bind="data.imgNote"></p>
+        </div>
+  		</div>
+
+  	</div>
+  	<div class="review_list">
+  		<a href="#/operation_log/{{dataDetail.orderBase.orderId}}">
+	  		<ul class="review_list_title">
+	  			<li class="review_list_header">
+	  				<p>操作日志</p>
+	  				<p><span class="ion-ios-arrow-right"></span></p>
+	  			</li>
+	  		</ul>
+  		</a>
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items">
+  				<p>
+  					<span>代办费：<span class="review_list_price">¥{{dataDetail.orderBase.agencyFee}}</span></span>
+  				</p>
+  				<p>
+  					<span>检测费：<span class="review_list_price">¥{{dataDetail.orderBase.testingFee}}</span></span>
+  				</p>
+  			</div>
+  			<!--<div class="maintenance_items_hr"></div>-->
+  			<div class="maintenance_items paddingTop0">
+  				<p>
+  					<span>拖车费：<span class="review_list_price">¥{{dataDetail.orderBase.towingFee}}</span></span>
+  				</p>
+  				<p>
+  					<span>其他费：<span class="review_list_price">¥{{dataDetail.orderBase.otherFee}}</span></span>
+  				</p>
+  			</div>
+  		</div>
+  	</div>
+
+  </ion-content>
+  <com-image-box></com-image-box>
+  <div class="footer_bars">
+		<p>总计：<span class="review_list_price">¥{{dataDetail.orderBase.totalMoney}}</span></p>
+	</div>
+</ion-view>

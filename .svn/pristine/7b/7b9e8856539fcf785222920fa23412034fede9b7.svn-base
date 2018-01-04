@@ -1,0 +1,41 @@
+<ion-view>
+	<ion-nav-title>
+    <div class="bar bar-header item-input-inset title no_border">
+    	<form action="javascript:return true;">
+        	<div class="h1 title">接车登记</div>
+        </form>
+    </div>
+  </ion-nav-title>
+  <ion-content>
+  	<div class="search_MHistory receiving_top">
+  		<!-- ng-keyup="receivingSeach()"-->
+  			<input ng-model="searchTxt.carLicense" type="text" ng-change="receivingSeach()" placeholder="可输入车牌号后三位模糊查询"/>
+    	<!--<i class="icon ion-qr-scanner receiving_right"></i>-->
+  	</div>
+    <div class="search_history_list" ng-show="searchHistoryList">
+      <ul>
+        <li ng-repeat="items in searchCarLicense" ng-click="receivingSeachVal(items)">{{items}}</li>
+      </ul>
+    </div>
+  	<div class="receiving_list" ng-show="carDetailsContent">
+  		<p><strong>{{carDetails.carLicense}}</strong><span class="receiving_list_left">{{carDetails.carModel}}</span></p>
+  		<p><span>{{carDetails.userName}}</span><span class="receiving_list_right">{{carDetails.userPhone}}</span></p>
+  		<p>总到店<strong class="redFont">{{carDetails.serviceTimes}}</strong>次</p>
+      <p>最近一次到店时间：<strong class="redFont">{{carDetails.lastTime}}</strong></p>
+  		<p>上次保养里程<strong class="greenFont">{{carDetails.lastMaintenanceMileage}}</strong>km&nbsp;</p>
+      <p>上次进厂里程<strong class="redFont">{{carDetails.lastMileage}}</strong>km</p>
+  		<p>本次保养最低里程<strong class="greenFont">{{carDetails.lowestMaintenanceMileage}}</strong>km</p>
+  	</div>
+  	<div class="receiving_btn">
+  		<p ng-click="search(searchTxt.carLicense)">维保历史查询</p>
+  	</div>
+    <div class="receiving_btn">
+      <p ng-click="goWorkOrder(searchTxt.carLicense)">导入工单查询</p>
+    </div>
+  	<div class="login_submit_btn">
+  		<a ng-click="billing(searchTxt.carLicense)" class="receiving_button"> <!--href="#/billingList/{{searchTxt.carLicense}}" -->
+  			<button class="button button-block button-light button-positive">开单</button>
+  		</a>
+  	</div>
+  </ion-content>
+</ion-view>

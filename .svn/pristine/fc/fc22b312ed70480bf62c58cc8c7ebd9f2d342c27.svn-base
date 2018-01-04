@@ -1,0 +1,207 @@
+
+/*自定义模态层样式*/
+.sm-modal{
+  display: none;
+  width: 100%;
+  position: absolute;
+  top:0;
+  z-index: 10;
+  overflow: hidden;
+}
+.sm-modal-bg{
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.3;
+}
+.sm-modal-header{
+  width: 100%;
+  height: 65px;
+  line-height: 90px;
+  /*background: white;*/
+  border-top-width: 0;
+  text-align: center;
+}
+.sm-modal-header span{
+  padding-left: 12px;
+  font:inherit;
+  font-size: 17px;
+  font-weight: 500;
+
+}
+.sm-modal-header i{
+  position: absolute;
+  top:0;
+}
+
+
+.sm-modal-header .icon{
+  width: 25px;
+  font-size: 2.2rem;
+
+}
+.sm-modal-header i.header-left{
+  left: 5px;
+  height: 60px;
+}
+.sm-modal-header i.header-right{
+  right: 10px;
+}
+.sm-modal-content{
+  background-color: #f2f2f2;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+.sm-modal-content .item{
+  margin-left: 0;
+  margin-right: 0;
+  border-top:1px solid #e5e5e5;
+  border-right:0;
+  border-bottom: 0;
+}
+.sm-modal-animation-fadeIn{
+  display: block;
+  /*animation: sm-modal-keyframes-fadeIn 1s ease 1;*/
+  /*-webkit-animation: sm-modal-keyframes-fadeIn 1s ease 1;*/
+}
+.sm-modal-animation-close{
+  display: block;
+  opacity: 0;
+}
+.sm-modal[type-set="top"] .sm-modal-content{
+  top:0;
+  left:0;
+}
+.sm-modal[type-set="bottom"] .sm-modal-content{
+  bottom:0;
+  left:0;
+}
+.sm-modal[type-set="left"] .sm-modal-content{
+  top:0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+}
+.sm-modal[type-set="left"] .sm-modal-content ion-content{
+  height: 100%;
+}
+.sm-modal[type-set="right"] .sm-modal-content{
+  top:0;
+  right: 0;
+  width: 80%;
+  height: 100%;
+}
+.sm-modal[type-set="right"] .sm-modal-content ion-content{
+  height: 100%;
+}
+@keyframes sm-modal-keyframes-fadeIn
+{
+  from {opacity: 0}
+  to {opacity: 1}
+}
+@-webkit-keyframes  sm-modal-keyframes-fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+/*自定义模态层样式 end*/
+/*覆盖框架内样式,解决item margin导致遗留黑色侧边边框*/
+[nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
+  background-color: #fff;
+}
+/*级联选择指令*/
+.sm-cascade{
+  height: 190px;
+  padding:5px 0;
+}
+.sm-cascade .col{
+  text-align: center;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+.sm-cascade .col li{
+  font-size: 14px;
+  font-weight: 500;
+  height: 36px;
+  line-height: 36px;
+  color: #888;
+  position: absolute;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  visibility:hidden;
+}
+.sm-cascade .col li.cascade-normal{
+  color: #888888;
+  visibility:visible;
+}
+.sm-cascade .col li.cascade-selected{
+  color: #484848;
+}
+.sm-cascade .sm-cascade-center{
+  position: absolute;
+  top: 72px;
+  width: 100%;
+  height: 36px;
+  border-top: solid 1px rgba(0,0,0,.1);
+  border-bottom: solid 1px rgba(0,0,0,.1);
+}
+.sm-cascade-list{
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  left: 0;
+  top:40%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.item .cascade-selected-icon{
+  position: absolute;
+  top: 12px;
+  right: 0px;
+  font-size: 1rem;
+  color: #aaa
+}
+.cascade-head{
+  /*background-color: #f0f0f0;*/
+}
+.cascade-head .col{
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: #9C9C9C;
+  font-size: 16px;
+  font-weight: 500;.
+}
+.BMap_bubble_title{
+  font: bold 14px/16px arial,sans-serif;
+  margin: 0;
+  color: #cc5522;
+}
+.BMap_bubble_content{
+  font: 12px arial,sans-serif;
+}
+.customer-progress-bar{ margin-top: 15px;}
+.customer-progress-bar p{ font-size: 13px;}
+.customer-bt{ font-size: 14px;color: #585858;}
+.way{ width: 30% !important;}
+.input-label{ font-size: 14px !important;}
+/*.platform-ios .sm-modal-content{ padding-top:20px;}*/
+.platform-ios .sm-modal[type-set="bottom"] .sm-modal-content{ padding-top:0;}
+/*.platform-ios .sm-modal-header i{ top:19px;}*/
+.platform-ios .sm-modal[type-set="bottom"] .sm-modal-header i{ top:0;}
+.templateType .item-content{ padding: 10px 49px 10px 16px;}
+.templateType .ion-checkmark{ top:-11px;}
+.platform-ios #time-modal .sm-modal-content{ padding-top:0;}
+.platform-ios #time-modal .sm-modal-header i{ top:0;}
+.customer-icon-right{ position: absolute; right: 5px; top: 88px;}
+.communicate-bottom{ border-bottom: 1px inset #E6E6E6;}
+/*.templateType .list{ margin-top: 10px;}*/
+.templateType .list label:last-child{ border-bottom: none;}
+.templateType .ion-checkmark:before{ font-size: 14px;}
+.addCustomer{ position: absolute;top:0;right: 6px;font-size: 1.5rem;background: white; width: 4%; height: 100%; padding: 0 5px 5px 5px;}
+.indexList .list{height:auto;overflow-y:scroll;}
+.modelClose{ font-size: 37px !important;}
+.consultant h5{ padding-left: 18px;}

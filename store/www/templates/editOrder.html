@@ -1,0 +1,384 @@
+ <ion-view hide-back-button="true"><!--title="{{title}}"-->
+	<ion-nav-title>
+		<div class="bar bar-header header">
+		  <button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>
+		  <h1 class="title ios_title">{{title}}</h1>
+		</div>
+	</ion-nav-title>
+    <ion-content>
+      <h3 class="new_kehu">客户信息</h3>
+    	<div class="billing_title customer_wbls_postition" ng-click="goCustomer()" >
+	    	<ul class="billing_title_center">
+	    		<li><a>{{orderMessage.carLicense}}</a><span>{{orderMessage.carModel}}</span></li>
+	    		<li>{{orderMessage.userName}}<span>{{orderMessage.userPhone}}&nbsp;&nbsp;{{orderMessage.operationType}}</span></li>
+	    	</ul>
+        	<i class="icon ion-ios-arrow-right customer_wbls_center"></i>
+	    </div>
+	    <div class="billing_title_entry" style="position: relative;">
+  			<p class="billing_title_entry_left" style="position: absolute;top: 12px;left: -2px;">工单类别<span>{{orderMessage.jobTypeName}}</span></p>
+  		</div>
+  		<div class="billing_title_entry_bottom">
+  			<ul ng-click="selectMainNature()">
+  				<li class="entry_bottom_left" >维修类别<span class="redFont">*</span></li>
+  				<li class="entry_bottom_center">{{orderMessage.repairTypeVal}}</li>
+  				<li class="entry_bottom_right"><i class="icon ion-ios-arrow-right"></i></li>
+  			</ul>
+  		</div>
+  		<div class="billing_title_entry_center">
+  			<p class="entry_center_left"><a>上次保养里程</a><span class="mileage" style="margin-left: 25px;">{{orderMessage.lastMaintenanceMileage}}</span> km</p>
+  			<p class="entry_center_left"><a>上次进厂里程</a><span class="mileage" style="margin-left: 25px;">{{orderMessage.lastMileage}}</span> km</p>
+  			<p class="entry_center_left"><a>进厂里程<i class="redFont">*</i></a><span><input type="number" placeholder="请输入进厂里程" ng-model="orderMessage.mileage"/></span>km <i class="proposal" ng-click="showSelectSuggest()">保养建议</i></p>
+  			<p class="entry_center_left"><a>送修人</a><span><input type="text" placeholder="请输入送修人" ng-model="orderMessage.sendPeopleName"/></span></p>
+  			<p class="entry_center_left"><a>送修人电话</a><input class="sendPeoplePhone" type="text" placeholder="请输入送修人电话" ng-model="orderMessage.sendPeoplePhone" ng-blur="verifyIphone(orderMessage.sendPeoplePhone)"/></p>
+  		</div>
+  		<div class="billing_title_entry_bottom">
+  			<ul ng-click="selectConsultant()">
+  				<li class="entry_bottom_left" >服务顾问<i class="redFont">*</i></li>
+  				<li class="entry_bottom_center">{{orderMessage.deptVal}}</li>
+  				<li class="entry_bottom_right"><i class="icon ion-ios-arrow-right"></i></li>
+  			</ul>
+  		</div>
+      <div class="billing_title_entry_bottom" ng-click="showSelectInsurer()">
+        <ul>
+          <li class="entry_bottom_left" >保险公司</li>
+          <li class="entry_bottom_center">{{orderMessage.insurerName}}</li>
+          <li class="entry_bottom_right"><i class="icon ion-ios-arrow-right"></i></li>
+        </ul>
+      </div>
+      <div class="billing_title_entry_bottom no_border" ng-if="orderMessage.refuseNote!=''">
+        <p class="entry_center_left"><a>驳回原因</a><span>{{orderMessage.refuseNote}}</span></p>
+      </div>
+      <div class="billing_title_entry_bottom no_border">
+  			<p class="entry_center_left"><a>备注</a><textarea type="text" placeholder="备注" ng-model="orderMessage.note"/></textarea></p>
+  		</div>
+  		<div style="clear: both;"></div>
+  		<div class="review_list no_padding">
+  			<p class="billing_enter_cen_top cailiao" ng-click="showCombo(2,'btn2','seach')">维修项目 <i class="icon ion-ios-plus-empty billing_item_add"></i></p>
+	  		<div ng-if="itemTemporary.length == 0" style="padding: 10px;">
+	  			暂无数据~~
+	  		</div>
+	  		<div class="review_list_content no-border no-padding">
+	  			<div ng-repeat="items in itemTemporary" class="color-font-{{items.changeType}}">
+	  				<div class="maintenance_items">
+		  				<p>
+		  					<span>{{items.projectName}}</span>
+		  					<br />
+		  					<span ng-if="items.canEdit==1">单价：<a1 class="a1">￥<input type="number" value="{{items.projectUnitPrice}}" ng-model="items.projectUnitPrice" ng-blur="anewItem()" /></a1></span>
+            				<span ng-if="items.canEdit==0">单价：<a1 class="a1">￥{{items.projectUnitPrice}}</a1></span>
+		  				</p>
+		  				<p>
+		  					<a ng-if="items.canEdit==0">工时：{{items.projectManHour}} </a>
+            				<a ng-if="items.canEdit==1">工时：<a1 class="a1"><input type="number" value="{{items.projectManHour}}" ng-model="items.projectManHour" ng-blur="anewItem()" /></a1></a>
+		  					<br />
+		  					<span>工时费：<span class="review_list_price">¥ {{items.projectUnitPrice * items.projectManHour | currency:""}}</span></span>
+		  				</p>
+          				<i class="icon ion-ios-close-empty itemClose" ng-click="itemClose($index,'itemTemporary')"></i>
+		  			</div>
+		  			<div class="maintenance_items_hr" ></div>
+	  			</div>
+	  		</div>
+
+	  	</div>
+		<p class="billing_entry_bottom_left bgf">小计：￥{{ItemSubtotal}}</p>
+  		<div class="billing_enter_cen">
+  			<p class="billing_enter_cen_top cailiao" ng-click="showCombo(3,'btn3','seach')">维修材料 <i class="icon ion-ios-plus-empty billing_material_add" ></i></p>
+  			<div ng-if="materialTemporary.length == 0" style="padding: 10px;">
+	  			暂无数据~~
+	  		</div>
+  			<ul class="billing_enter_cen_center" ng-repeat="data in materialTemporary">
+
+  				<li>{{data.goodsName}}&nbsp;&nbsp;{{data.goodsStyle}}&nbsp;&nbsp;{{data.brandName}}</li>
+  				<!--<li class="cen_center_left">{{data.goodsName}}</li>
+  				<li class="cen_center_right">&nbsp;&nbsp;{{data.goodsStyle}}</li>-->
+  				<!--<li class="cen_center_left">
+  					<span ng-if="data.onlySelfPurchase==0">
+
+						<label class="toggle disable-user-behavior">
+        					<input type="checkbox" value="on" ng-click="getPurchase($event,$index,'cai',data.purchaseRealPrice,data.onlySelfPurchase)">
+        					<div class="track">
+        						<div class="handle"></div>
+        					</div>
+        				</label>自采
+					</span>
+					<span ng-if="data.onlySelfPurchase==1">
+
+        				<label class="toggle disable-user-behavior">
+        					<input type="checkbox" value="on" disabled="disabled" checked ng-click="getPurchase($event,$index,'cai',data.purchaseRealPrice,data.onlySelfPurchase)">
+        					<div class="track">
+        						<div class="handle"></div>
+        					</div>
+        				</label>自采
+					</span>
+
+  				</li>-->
+  				<li class="cen_center_right cailiaoNumber">
+  					<span>
+						<span>数量：</span>
+						<a ng-click="goodsNumLess($index)" class="numOpera" href="javascript: void(0)"> - </a>
+						<input id="goodsNum{{$index}}" class="goodsnum iosSmall" type="number" ng-model="data.goodsNumber" ng-change="anewGoods()" />
+						<a ng-click="goodsNumAdd($index)" class="numOpera" href="javascript: void(0)">+</a>
+					  </span>
+  				</li>
+  				<li class="cen_center_left cailiaoNumber">
+  					<!--<span ng-if="data.onlySelfPurchase==0">-->
+						<span>单价：</span>
+						<input class="danjia1" ng-if="data.purchaseType==0" id="cai{{$index}}" type="number" name="cost" ng-model="data.goodsUnitPrice" ng-keyup="veifNum(data.goodsUnitPrice)" disabled ng-change="anewGoods()"  style="border: 0;"/>
+						<input class="danjia1" ng-if="data.purchaseType==10 || data.purchaseType==20" id="cai{{$index}}" type="number" name="cost" ng-model="data.goodsUnitPrice" ng-keyup="veifNum(data.goodsUnitPrice)" ng-change="anewGoods()" />
+         		</li>
+  				<li class="cen_center_right" style="width: 100%;">
+  					金额：
+  					<span class="review_list_price ng-binding">￥{{(data.goodsUnitPrice*data.goodsNumber)| currency:""}}</span>
+  				</li>
+          		<i class="icon ion-ios-close-empty itemClose" ng-click="materialClose($index,'materialTemporary')"></i>
+  			</ul>
+
+
+  		</div>
+  		<p class="billing_entry_bottom_left bgf">小计：￥{{materialSubtotal}}</p>
+  		<div class="billing_entry_center_bottom">
+  			<p class="billing_enter_cen_top">附加费用</p>
+  			<ul class="cost_center">
+  				<li><span>拖车费: </span><input type="number" ng-model="otherPrice.towingFee" /></li>
+  				<li><span>代办费: </span><input type="number" ng-model="otherPrice.agencyFee" /></li>
+          <li><span>检测费: </span><input type="number" ng-model="otherPrice.testingFee" /></li>
+      		<li><span>其他费: </span><input type="number" ng-model="otherPrice.otherFee" /></li>
+  			</ul>
+  			<p class="billing_entry_center_bottom_left">小计：{{otherPrice.towingFee*1+otherPrice.agencyFee*1+otherPrice.testingFee*1+otherPrice.otherFee*1 | currency:'￥'}}</p>
+  		</div>
+      <div class="billing_imgUplad">
+        <ul class="review_list_title hasTopHeader">
+          <li class="review_list_header">
+            <p>图片</p>
+          </li>
+        </ul>
+        <div id="myImgs" class="review_list_content no-border review_list_img_wrap">
+          <div class="review_list_img">
+            <img src="{{img0}}" ng-click='choosePicMenu1(0)'/>
+            <p>进店车照</p>
+          </div>
+          <div class="review_list_img" >
+            <img src="{{img1}}" ng-click='choosePicMenu1(1)'/>
+            <p>里程表照</p>
+          </div>
+          <div style="display: none;"  class="review_list_img" ng-show="imgList.operationStatus!='001'">
+            <img src="{{img2}}" ng-click='choosePicMenu1(2)'/>
+            <p>完工签字照</p>
+          </div>
+          <div class="review_list_img" ng-repeat="item in upArray" ng-if="upArray.length>0">
+            <img src="{{item.imgUrl}}" ng-click='choosePicMenu($index)'/>
+            <p>
+              <input name='otherNote' type='text' ng-model='item.imgNote' ng-blur="checkText($index)" />
+            </p>
+            <i class='icon ion-android-cancel' ng-click='removeImg($index, item.imgNumber)'></i>
+          </div>
+          <div id="newImgBtn" class="review_list_img" >
+            <img src="../www/img/addimg.png" ng-click="addImg()"/>
+          </div>
+        </div>
+      </div>
+      <div class="billingBtmHeight"></div>
+      </div>
+  	 <!-- <div class="billing_bottom">
+  			<p class="billing_enter_cen_top">总计：<span>{{ItemSubtotal*1+materialSubtotal*1+otherPrice.towingFee*1+otherPrice.agencyFee*1+otherPrice.testingFee*1+otherPrice.otherFee*1 | currency:'￥'}}</span></p>
+  			<button class="billing_bottom_button" ng-click="saveBilling()" ng-disabled="btnDisabled">保存</button>
+      </div>-->
+      <!--维修类别-->
+      <script id="main-nature-modal" type="text/ng-template">
+        <sm-modal modal-id="main-nature-modal" title="选择维修类别" type-set="right" >
+          <ul class="list">
+            <li class="item" ng-repeat="item in orderMessage.repairTypeArray" ng-click="selectNature(item.repairTypeName,item.repairType)">{{item.repairTypeName}}</li>
+          </ul>
+        </sm-modal>
+      </script>
+      <!--服务顾问-->
+      <script id="main-consultant-modal" type="text/ng-template">
+        <sm-modal modal-id="main-consultant-modal" title="选择服务顾问" type-set="right" >
+          <div class="consultant" ng-repeat="item in orderMessage.deptArray">
+            <h5 ng-bind="item.deptName"></h5>
+            <ul class="list">
+              <li class="item" ng-repeat="data in item.deptUserArray" ng-click="selectConsultantVal(data.deptUserName,data.deptUserId,item.deptId)">{{data.deptUserName}}</li>
+            </ul>
+          </div>
+        </sm-modal>
+      </script>
+      <!--保险公司-->
+      <script id="main-insurance-modal" type="text/ng-template">
+        <sm-modal modal-id="main-insurance-modal" title="选择保险公司" type-set="right" >
+          <ion-scroll delegate-handle="start" ng-style="baoHeight">
+            <div class="consultant" ng-repeat="item in orderMessage.insurerArray">
+              <h5 ng-bind="item.deptName"></h5>
+              <ul class="list">
+                <li class="item" ng-click="selectInsurer(item.insurerName,item.insurerId)">{{item.insurerName}}</li>
+              </ul>
+            </div>
+          </ion-scroll>
+        </sm-modal>
+      </script>
+      <!--保养建议-->
+      <script id="main-suggest-modal" type="text/ng-template">
+        <sm-modal modal-id="main-suggest-modal" title="保养建议" type-set="right" >
+          <ion-scroll delegate-handle="start" ng-style="baoHeight">
+            <div class="suggest" ng-style="baoHeight">
+              <div class="suggestTop">
+                <p><span>车型: </span><span class="suggestCar">{{maintenanceList.carModelName}}</span></p>
+                <p><span>本次进厂里程: </span><span>{{maintenanceList.mileage}}km</span></p>
+              </div>
+              <div class="suggestCenter">
+                <label class="suggestList" for="{{data.projectId}}" ng-repeat="data in maintenanceList.maintenanceProjectArray" ng-click="updateSelection($event,data,'selectedItem')">
+                  <div class="checkbox"><input id="{{data.projectId}}" type="checkbox" name="{{data.projectName}}" ng-checked="data.isSelected"></div>
+                  <div ng-class="{'act':data.serviceProjectColor==0,'red':data.serviceProjectColor==1,'black':data.serviceProjectColor==2}">
+                    <p>
+                      <span>{{data.name}}</span>
+                    </p>
+                    <p>
+                      <span>实际间隔里程:{{data.realKilometer}}km</span>
+                    </p>
+                    <p>
+                      <span>约定保养里程区间:</span>
+                    </p>
+                    <p>
+                      <span>{{data.adviceKilometer}}km</span>
+                    </p>
+                    <p>
+                      <span>建议保养:{{data.isAdviceMaintenanceCN}}</span>　<span>是否超保:{{data.isSuperMaintenanceCN}}</span>
+                    </p>
+                  </div>
+                  <div ng-if="maintenanceList.maintenanceProjectArray.length==0">暂无建议</div>
+                </label>
+              </div>
+            </div>
+            <a href="" class="saveCombo" ng-click="seveItemFn()">确认</a>
+          </ion-scroll>
+        </sm-modal>
+      </script>
+      <!--套餐选择-->
+      <script id="main-combo-modal" type="text/ng-template">
+        <sm-modal modal-id="main-combo-modal" title="{{itemTitle}}" type-set="right" >
+              <div class="combo_top">
+                <a ng-click="showCombo(1,'btn1','seach')" ng-class="{act: isAct=='btn1'}"><span>套餐</span></a>
+                <a ng-click="showCombo(2,'btn2','seach')" ng-class="{act: isAct=='btn2'}"><span>项目</span></a>
+                <a ng-click="showCombo(3,'btn3','seach')" ng-class="{act: isAct=='btn3'}"><span>自营<!--自营商品--></span></a>
+                <a ng-click="showCombo(4,'btn4','seach', '开放')" ng-class="{act: isAct=='btn4'}"><span>开放</span></a>
+                <a ng-click="showCombo(5,'btn5','seach', '自建')" ng-class="{act: isAct=='btn5'}"><span>自建<!--非自营商品--></span></a>
+                 <div class="billing_seach" ng-if="seveComboBtn">
+                  <i class="icon ion-ios-search placeholder-icon search_input_icon" ng-click="showCombo(1,'btn1')"></i>
+                  <input style="width: 86%;" type="text" placeholder="输入套餐名称/首字母/规格型号/品牌/出厂编码搜索" ng-model="orderMessage.servicePackageKeyWord" ng-change="showCombo(1,'btn1'); isSeachVal(orderMessage.servicePackageKeyWord,1,'btn1')" />
+                  <i ng-click="isSeachVal(orderMessage.servicePackageKeyWord,1,'btn1','click')" ng-show="packageStatus" class="icon ion-android-close delPassword"></i>
+                </div>
+                <div class="billing_seach" ng-if="seveItemBtn">
+                  <i class="icon ion-ios-search placeholder-icon search_input_icon" ng-click="showCombo(2,'btn2')"></i>
+                  <input style="width: 86%;" type="text" placeholder="输入项目名称/首字母/规格型号/品牌/出厂编码搜索" ng-model="orderMessage.projectKeyWord" ng-change="showCombo(2,'btn2'); isSeachVal(orderMessage.projectKeyWord,2,'btn2')" />
+                  <i ng-click="isSeachVal(orderMessage.projectKeyWord,2,'btn2','click')" ng-show="projectStatus" class="icon ion-android-close delPassword"></i>
+                </div>
+                <div class="billing_seach" ng-if="seveMaterialBtn">
+                  <i class="icon ion-ios-search placeholder-icon search_input_icon" ng-click="showCombo(3,'btn3')"></i>
+                  <input style="width: 86%;" type="text" placeholder="输入材料名称/首字母/规格型号/品牌/出厂编码搜索" ng-model="orderMessage.goodsKeyWord" ng-change="showCombo(3,'btn3'); isSeachVal(orderMessage.goodsKeyWord,3,'btn3')" />
+                  <i ng-click="isSeachVal(orderMessage.goodsKeyWord,3,'btn3','click')" ng-show="goodsStatus" class="icon ion-android-close delPassword"></i>
+                </div>
+                
+                <div class="billing_seach" ng-if="seveMaterialBtnTwo">
+                  <i class="icon ion-ios-search placeholder-icon search_input_icon" ng-click="showCombo(4,'btn4')"></i>
+                  <input style="width: 86%;" type="text" placeholder="输入材料名称/首字母/规格型号/品牌/出厂编码搜索new" ng-model="orderMessage.openGoodsKeyWord" ng-change="showCombo(4,'btn4'); isSeachVal(orderMessage.openGoodsKeyWord,4,'btn4')" />
+                  <i ng-click="isSeachVal(orderMessage.openGoodsKeyWord,4,'btn4','click')" ng-show="materialStatus" class="icon ion-android-close delPassword"></i>
+                </div>
+				<div class="billing_seach" ng-if="seveDisparkBtn">
+                  <i class="icon ion-ios-search placeholder-icon search_input_icon" ng-click="showCombo(5,'btn5')"></i>
+                  <input style="width: 86%;" type="text" placeholder="输入材料名称/首字母/规格型号/品牌/出厂编码搜索new" ng-model="orderMessage.materialKeyWord" ng-change="showCombo(5,'btn5'); isSeachVal(orderMessage.materialKeyWord,5,'btn5')" />
+                  <i ng-click="isSeachVal(orderMessage.materialKeyWord,5,'btn5','click')" ng-show="openTabStatus" class="icon ion-android-close delPassword"></i>
+                </div>
+              </div>
+          <div class="" >
+          <ion-scroll delegate-handle="start" ng-style="gridHeight">
+                <ul class="list mealList">
+                  <li class="item item-checkbox" ng-repeat="item in repairs"
+                      ng-click="setMeal(item.diServicePackageName)">
+                  <label class="checkbox" for="{{data.carModelId}}">
+                    <input type="radio" name="fly1" id="{{data.carModelId}}"
+                         ng-click="updateSelection($event,item,'selectedCombo','combo')" /></label>
+                    {{item.diServicePackageName}}
+                    <!--ng-checked="isSelected(item.diServicePackageName)"-->
+                    <div class="twoMenu" ng-if="isItem==item.diServicePackageName">
+                      <p>
+                        <span ng-repeat="data in item.diServicePackageGoodsArray">
+                          {{data.goodsName}} {{data.brandName}} {{data.goodsStyle}} X{{data.goodsNumber}}
+                        </span>
+                      </p>
+                      <p>
+                        <span ng-repeat="data in item.diServicePackageProjectArray">
+                          {{data.projectName}}
+                        </span>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+                <ul class="list mealList">
+                  <li class="item item-checkbox" ng-repeat="data in repairsItem">
+                  <label class="checkbox" for="{{data.projectId}}">
+
+                    <input type="checkbox" name="{{data.projectName}}" id="{{data.projectId}}"
+                           ng-click="updateSelection($event,data,'selectedItem')"></label>
+                    {{data.projectName}}
+                    <span style="float: right;">￥{{data.projectUnitPrice}}</span>
+                  </li>
+                </ul>
+                <ul class="list mealList">
+                  <li class="item item-checkbox" ng-repeat="itemData in repairsMaterial">
+                  <label class="checkbox" for="{{itemData.goodsId}}">
+                    <input type="checkbox" name="{{itemData.goodsName}}" id="{{itemData.goodsId}}"
+                           ng-click="updateSelection($event,itemData,'selectedMaterial')">
+                  </label>
+                    <span>[商城]</span> {{itemData.goodsName}} {{itemData.brandName}} {{itemData.goodsStyle}}  {{itemData.carModel}}<!--{{itemData.goodsNumber}}-->
+                    <p>￥{{itemData.goodsUnitPrice}}</p>
+                  </li>
+                </ul>
+               <!-- <ul class="list mealList">
+                  <li class="item item-checkbox" ng-repeat="itemData in repairsDispark">
+                    <label class="checkbox" for="{{itemData.goodsName}}">
+                      <input type="checkbox" name="{{itemData.goodsName}}" id="{{itemData.goodsName}}"
+                             ng-click="updateSelection($event,itemData,'selectedMaterial')">
+                    </label>
+                    <span>[自建]</span> {{itemData.goodsName}} {{itemData.brandName}} {{itemData.goodsStyle}}  {{itemData.carModel}}
+                    <p>￥{{itemData.goodsUnitPrice}}</p>
+                  </li>
+                </ul>-->
+                <ul class="list mealList">
+                  <li class="item item-checkbox" ng-repeat="itemData in repairsMaterialTwo">
+                    <label class="checkbox" for="{{itemData.goodsName}}">
+                        <input type="checkbox" name="{{itemData.goodsName}}" id="{{itemData.goodsName}}"
+                               ng-click="updateSelection($event,itemData,'selectedMaterial')">
+                    </label>
+                    <span>[{{tabChangeName}}]</span> {{itemData.goodsName}} {{itemData.brandName}} {{itemData.goodsStyle}}  {{itemData.carModel}}<!--{{itemData.goodsNumber}}-->
+                    <p>￥{{itemData.goodsUnitPrice}}</p>
+                  </li>
+                </ul>
+
+                <ion-infinite-scroll on-infinite="loadMore()" ng-if="isLoad" distance="1%"></ion-infinite-scroll>
+                  <div class="frm_visit_no" ng-show="repairCar">
+                    <div class="col text_center index_no_visitPlan">
+                      <span class="icon-salesman_15 index_icon_visitPlan"></span>
+                      <p>没有更多数据</p>
+                    </div>
+                  </div>
+                </ion-scroll>
+            <a href="" class="saveCombo" ng-if="seveComboBtn" ng-click="seveComboFn()">确认</a>
+            <a href="" class="saveCombo" ng-if="seveItemBtn" ng-click="seveItemFn()">确认</a>
+            <a href="" class="saveCombo" ng-if="seveMaterialBtn" ng-click="seveMaterialFn()">确认</a>
+            <a href="" class="saveCombo" ng-if="seveMaterialBtnTwo" ng-click="seveMaterialTwnFn()">确认</a>
+          	<a href="" class="saveCombo" ng-if="seveDisparkBtn" ng-click="seveOpenGoodsFn()">确认</a>
+          </div>
+        </sm-modal>
+      </script>
+  </ion-content>
+  <div class="PriceDetails" ng-show="PriceDetails">
+     <p>费用合计：<span class="review_list_price"></span>
+       项目费：<span class="review_list_price">¥{{ItemSubtotal}}</span> +
+       材料费：<span class="review_list_price">¥{{materialSubtotal}}</span> +
+       附加费用：<span class="review_list_price">{{otherPrice.towingFee*1+otherPrice.agencyFee*1+otherPrice.testingFee*1+otherPrice.otherFee*1 | currency:'￥'}}</span>
+     </p>
+   </div>
+   <div class="footer_bars">
+     <p ng-click="showPriceDetails()">总计：<span class="review_list_price">￥{{ItemSubtotal*1+materialSubtotal*1+otherPrice.towingFee*1+otherPrice.agencyFee*1+otherPrice.testingFee*1+otherPrice.otherFee*1}}</span><i ng-class="PriceDetailsClassName"></i></p>
+       <button class="button button-outline review_list_btn_turnDown review_list_btn" ng-click="saveBilling()">保存</button>
+     </a>
+   </div>
+</ion-view>

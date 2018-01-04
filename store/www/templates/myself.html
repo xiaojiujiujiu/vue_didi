@@ -1,0 +1,32 @@
+<ion-view view-title="" hide-nav-bar="true">
+	<ion-content>
+		<div class="myself_top">
+	        <div class="top_center">
+
+	          	<img src="./img/head_portrait_03.png"/>
+
+	          <div class="top_right">
+	            <p>{{result.shortName}}</p>
+	          </div>
+	        </div>
+	    </div>
+		<div class="myself_connect">
+	        <p class="item item-icon-left item-icon-right myself_connect_top" ng-click="callPhone(result.partyPhone)">
+	          <i><img src="./img/serve_03.png" class="myself_serve"/></i>
+	          	客户服务
+	          	<span class="fl-right">{{result.partyPhone}}</span>
+	          <i class="icon ion-ios-arrow-right"></i>
+	        </p>
+	        <a class="item item-icon-left item-icon-right myself_connect_top" href="javascript: void(0)">
+	          <i><img src="./img/version_03.png" class="myself_serve"/></i>
+	          	当前版本
+	          	<span class="fl-right">{{versionNum}}</span>
+	          <i class="icon ion-ios-arrow-right"></i>
+	        </a>
+        </div>
+       	<a href="javascript: void(0)" ng-click="dropOut()" class="myself_bottom">
+        	<button class="myself_bottom">退出登录</button>
+        </a>
+
+	</ion-content>
+</ion-view>

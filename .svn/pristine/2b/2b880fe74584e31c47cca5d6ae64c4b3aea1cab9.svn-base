@@ -1,0 +1,45 @@
+<ion-view hide-back-button="true">
+  <ion-nav-title>
+    <div class="bar bar-header header item-input-inset no_border">
+      <button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>
+      <!--<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="opacity: 0;"><i class="icon ion-ios-arrow-left"></i> -->
+      <form action="javascript:return true;" style="width: 94%;">
+        <label class="item-input-wrapper search_input_wrap">
+          <i class="icon ion-ios-search placeholder-icon search_input_icon"></i>
+          <input id="keyword" type="search" ng-keypress="seachList($event)" placeholder="请输入工单号/车牌号" ng-model="reviewList.didiKeyWord" class="search_input">
+        </label>
+      </form>
+    </div>
+  </ion-nav-title>
+  <div class="combo_top">
+    <a ng-click="getCombo('btn1')" ng-class="{act: isAct=='btn1'}"><span>套餐</span></a>
+    <a ng-click="getCombo('btn2')" ng-class="{act: isAct=='btn2'}"><span>项目</span></a>
+    <a ng-click="getCombo('btn3')" ng-class="{act: isAct=='btn3'}"><span>材料</span></a>
+  </div>
+  <ion-content>
+  <div class="combo_center">
+    <div>
+      选取的值为: {{ selected }}
+    </div>
+    <ul class="list">
+      <li class="item item-checkbox" ng-repeat="item in repairs" ng-click="setMeal(item.diServicePackageName)">
+        <span class="checkbox">
+          <input type="checkbox" name="{{item.diServicePackageName}}"
+                ng-checked="isSelected(item.diServicePackageName)" ng-click="updateSelection($event,item.diServicePackageName)"></span>
+        {{item.diServicePackageName}}
+        <div ng-if="isItem==item.diServicePackageName">
+          这是二级菜单
+        </div>
+      </li>
+
+    </ul>
+  </div>
+    <ion-infinite-scroll on-infinite="loadMore()" ng-if="isLoad" distance="1%"></ion-infinite-scroll>
+    <div class="frm_visit_no" ng-show="repairCar">
+      <div class="col text_center index_no_visitPlan">
+        <span class="icon-salesman_15 index_icon_visitPlan"></span>
+        <p>没有更多数据</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

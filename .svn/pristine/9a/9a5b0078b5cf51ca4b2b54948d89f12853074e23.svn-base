@@ -1,0 +1,11 @@
+<ion-view view-title="接车登记">
+  <ion-content>
+  	<div class="search_MHistory">
+  		<label for="">VIN码&nbsp;&nbsp;</label>
+    	<input type="text" placeholder="请输入车牌号/VIN码"/>
+  	</div>
+  	<div class="login_submit_btn">
+  		<button type="submit" class="button button-block button-light button-positive">下一步</button>
+  	</div>
+  </ion-content>
+</ion-view>

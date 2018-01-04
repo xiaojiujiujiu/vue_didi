@@ -1,0 +1,42 @@
+<ion-view view-title="派工">
+  <ion-content>
+  	<div class="review_list marginTop0">
+  		<div class="review_list_content no-border">
+  			<p>工单号：{{result.data.code}}</p>
+  			<p>车牌号：{{result.data.carLicense}}</p>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>服务项目</p>
+  				<p>
+  					<a href="javascript: void(0)" ng-click="oneKeySendWork(0)"><!--ng-click="openPopover($event, {{item.projectId}})"-->
+  						<span class="review_list_price">一键派工></span>
+  					</a>
+  				</p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items" ng-repeat="item in result.data.list">
+  				<p class="send_work_name">
+  					<span>{{item.projectName}}</span>
+  				</p>
+  			<!--	<p class="send_work_projectUnit">
+  					<span>工时费：¥ {{item.projectUnitTotalMoney}}</span>
+  				</p>-->
+  				<p class="send_work_people">
+  					<!--href="#/service_technician/{{sendParam.orderId}}/{{sendParam.code}}/{{sendParam.carLicense}}/{{sendParam.technician}}/{{item.projectId}}"-->
+  					<a href="#/service_technician/{{sendParam.orderId}}/{{item.projectId}}" >
+  						<span class="review_list_price" ng-if="item.RepairOrderProjectUserNameStr != ''">{{item.RepairOrderProjectUserNameStr}}</span>
+  						<span class="review_list_price" ng-if="item.RepairOrderProjectUserNameStr == ''">派工></span>
+  					</a>
+  				</p>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="login_submit_btn" ng-click="sendWork()">
+      	<button class="button button-block button-light button-positive" id="btn_save">派工完成</button>
+      </div>  
+  </ion-content>
+</ion-view>

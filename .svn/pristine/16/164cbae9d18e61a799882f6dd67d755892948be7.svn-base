@@ -1,0 +1,22 @@
+<ion-view view-title="操作日志">
+  <ion-content>
+  	<div class="review_list marginTop0">
+  		<div class="review_list_content no-border">
+  			<p>工单号：<span ng-bind="operationList.code"></span></p>
+  			<p>车牌号：<span ng-bind="operationList.carLicense"></span></p>
+  			<p>工单状态：<span ng-bind="operationList.statusName"></span></p>
+  		</div>
+  	</div>
+  	<section class="info-tree">
+        <div>
+            
+            <div class="floor" ng-class="{active: isAct==data.index}" ng-repeat="data in causeList">
+            		<i class="icon ion-checkmark-circled" ></i>
+            		<em>{{data.content}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>操作人：{{data.operName}}</span></em>
+                <i ng-if="data.refuseNote">[驳回原因] <span ng-bind="data.refuseNote"></span></i>
+                <i class="FC_gray" ng-bind="data.time"></i>
+            </div>
+        </div>
+    </section>
+  </ion-content>
+</ion-view>

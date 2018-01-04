@@ -1,0 +1,121 @@
+<ion-view hide-back-button="true">
+
+	<ion-nav-title>
+	    <div class="bar bar-header header item-input-inset no_border">
+	    	<button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>
+	    	<!--<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="opacity: 0;"><i class="icon ion-ios-arrow-left"></i> -->
+			<form action="javascript:return true;" style="width: 94%;">
+			    <label class="item-input-wrapper search_input_wrap search_orderTop_wrap">
+			        <i class="icon ion-ios-search placeholder-icon search_input_icon"></i>
+			        <input id="keyword" type="search" ng-keypress="seachList($event)" placeholder="请输入工单号/车牌号" ng-model="reviewList.didiKeyWord" class="search_input">
+			      </label>
+			</form>
+	    </div>
+    </ion-nav-title>
+    <ion-scroll scrollbar-x="false" direction="x"  class="list_tab">
+    <ul id="tab_wrap">
+    	<li ng-repeat="item in tabs" ng-click="selectedTab($index,item.searchstatus,this)">
+    		<span ng-if="$index == 2 || $index == 3 || $index == 6 || $index == 7" id="itemsNum{{$index}}" class="index_num top5"></span>
+    		{{item.name}}
+    	</li>
+    </ul>
+    </ion-scroll>
+	<ion-tabs class="tabs-striped tabs-top">
+		<!--<ion-tab ng-repeat="item in tabs" ng-click="selectedTab($index,item.searchstatus)" title="{{item.name}}"></ion-tab>-->
+	</ion-tabs>
+
+    <ion-content class="order_list_ios">
+
+  	<ion-slide-box show-pager="false" class="has-header" on-slide-changed="slideChanged($index,item.searchstatus)">
+      <ion-slide ng-repeat="slide in slides">
+        <div class="review_list" ng-repeat="data in repairs">
+	  		<ul class="review_list_title">
+	  			<li>
+	  				<p>单号：<span ng-bind="data.code"></span></p>
+	  				<p class="del_icon" ng-if="data.operationStatus==001" ng-click="deleteOrder(data.id)"><i class="ion-ios-trash-outline"></i></p>
+	  			</li>
+	  		</ul>
+	  		<a href="#/order_detail/{{data.id}}">
+	  			<div class="review_list_content">
+		  			<p>车牌号：<span ng-bind="data.carLicense"></span><span class="orderStatus review_list_price" ng-bind="data.statusName"></span></p>
+		  			<p>进厂时间：<span ng-bind="data.createTime"></span></p>
+		  			<p>车型：<span ng-bind="data.carModelName"></span></p>
+		  			<p>工单类型：<span ng-bind="data.jobTypeName"></span></p>
+		  			<p>维修类型：<span ng-bind="data.repairTypeName"></span></p>
+		  			<p>进厂里程：<span ng-bind="data.mileage"></span>km</p>
+		  			<p>总费用：<span class="review_list_price">¥<span ng-bind="data.totalMoney"></span></span></p>
+
+		  			<p ng-if="data.operationStatus == 003 || data.operationStatus == 008">驳回原因：{{data.refuseNote}}</p>
+		  		</div>
+	  		</a>
+	  		 <!-- || data.statusName != '异常单' || data.statusName != '待结算 009'-->
+	  		 <!-- data.statusName != 009 data.statusName != 003 data.statusName != 008-->
+	  		<div class="review_list_btnWrap">
+	  			<!-- 已创建：001-->
+	  			<a href="#/upload_photos/{{data.id}}/{{data.operationStatus}}" ng-if="data.operationStatus==001">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn">上传照片</button>
+	  			</a>
+	  			<a href="" ng-if="data.operationStatus==001">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn" ng-click="audit(data.id)">提交审核</button>
+	  			</a>
+	  			<a href="#/M_history/{{data.carLicense}}" ng-if="data.operationStatus==001">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn">历史</button>
+	  			</a>
+	  			<a href="" ng-if="data.operationStatus==001">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn" ng-click="alter(data.id)">修改</button>
+	  			</a>
+	  			<!--<a href="" ng-if="data.operationStatus==001">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn" ng-click="audit(data.id)">删除</button>
+	  			</a>-->
+
+	  			<!-- 待审核：002 || 已驳回：003 || 待总检：007 || 异常单：008-->
+
+	  			<a href="" ng-if="data.operationStatus==002 || data.operationStatus==003 || data.operationStatus==007 || data.operationStatus==008 ">
+	  				<button class="button button-outline review_list_btn_turnDown gray review_list_btn" ng-click="withdraw(data.operationStatus, data.id)">撤回</button>
+	  			</a>
+
+	  			<!-- 待派工：004-->
+
+	  			<a href="#/sendWork/{{data.id}}/{{data.code}}/{{data.carLicense}}" ng-if="data.operationStatus==004">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn">派工</button>
+	  			</a>
+	  			<a href="" ng-if="data.operationStatus==004">
+	  				<button class="button button-outline review_list_btn_turnDown review_list_btn" ng-click="alter(data.id)">修改</button>
+	  			</a>
+
+	  			<!-- 待完工：005-->
+
+	  			<a href="#/sendWork/{{data.id}}/{{data.code}}/{{data.carLicense}}" ng-if="data.operationStatus==005">
+	                <button class="button button-outline review_list_btn_turnDown review_list_btn">重派</button>
+	            </a>
+	            <a href="javascript: void(0)" ng-if="data.operationStatus==005" ng-click="alter(data.id)">
+	                <button class="button button-outline review_list_btn_turnDown review_list_btn">修改</button>
+	            </a>
+	            <a href="javascript: void(0)" ng-if="data.operationStatus==005" ng-click="finished(data.id)">
+	                <button class="button button-outline review_list_btn_turnDown review_list_btn">完工</button>
+	            </a>
+
+	            <!-- 已完工：006-->
+	            <a href="#/upload_photos/{{data.id}}/{{data.operationStatus}}" ng-if="data.operationStatus==006">
+	                <button class="button button-outline review_list_btn_turnDown review_list_btn">提交总检</button>
+	            </a>
+
+
+	  		</div>
+	  	</div>
+      </ion-slide>
+	</ion-slide-box>
+      <ion-infinite-scroll on-infinite="loadMore()" ng-if="isLoad" distance="1%"></ion-infinite-scroll>
+      <div class="frm_visit_no" ng-show="repairCar">
+        <div class="col text_center index_no_visitPlan">
+          <span class="icon-salesman_15 index_icon_visitPlan"></span>
+          <p ng-if="searchStatus">没有更多数据</p>
+          <div ng-if="!searchStatus">
+          	<i class="icon ion-clipboard" style="font-size: 100px;"></i>
+          	<br />
+          	<p>抱歉，没有找到符合条件的工单！</p>
+          </div>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

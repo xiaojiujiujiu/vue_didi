@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4f26641a-4059-43d2-9f03-a6421e773405" name="localhost" url="http://172.16.0.133">
+        <fileTransfer mountedRoot="D:\work\svn\滴滴\store\www" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

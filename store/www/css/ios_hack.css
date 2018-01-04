@@ -1,0 +1,46 @@
+.bar.item-input-inset .item-input-wrapper.search_input_wrap,
+.button.button-clear.button-positive.drop_out{
+  position: relative;
+  top: -22px;
+}
+.bar.item-input-inset .item-input-wrapper.search_input_wrap{
+  top: -22px;
+  left:-10px;
+}
+.bar.item-input-inset .item-input-wrapper.search_orderTop_wrap{
+  top: -32px;
+}
+.frm_visit_no p{
+  position: relative;
+  top: 20px;
+}
+.bar .title.ios_title{
+  top: -22px;
+}
+/*.billing_content{
+    top: 97px;
+}*/
+.new_kehu{ margin-bottom:0px;}
+.scroll-view.list_tab{ top:65px;}
+.order_list_ios{
+	top: -30px;
+}
+div.billingBtmHeight{
+	height: 20px
+}
+
+@media screen and (min-width:320px) and (max-width:375px){
+  input[type="number"].goodsnum.iosSmall{
+		width: 33px;
+	}
+}
+@media screen and (max-width:320px){
+	.billing_entry_center_bottom .cost_center li{
+		width: 70%;
+	}
+}
+.loginTop{ padding-top: 0 !important;}
+input[type="number"].danjia1{
+	opacity: 1;
+	color: #FC8540;
+}

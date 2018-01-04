@@ -1,0 +1,14 @@
+<ion-view hide-back-button="true">
+  <ion-nav-title>
+    <div class="bar bar-header header">
+      <button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>
+      <h1 class="title ios_title">工单类型<a class="orderTypeBtn float_right iconfont icon-wenhao" href="#/orderType"></a></h1>
+
+    </div>
+  </ion-nav-title>
+  <ion-content>
+    <div class="list payList">
+      <a class="item" ng-repeat="data in carPlateList" ng-click="addWorkOrder(data.jobType,data.jobTypeName)">{{data.jobTypeName}}<i class="float_right icon ion-ios-arrow-right"></i></a>
+    </div>
+  </ion-content>
+</ion-view>

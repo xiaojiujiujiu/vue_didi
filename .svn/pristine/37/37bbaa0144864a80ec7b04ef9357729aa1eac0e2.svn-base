@@ -1,0 +1,177 @@
+<ion-view view-title="工单详情">
+  <ion-content class="detail_content">
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>审核信息</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border">
+  			<p>工单类型：<span ng-bind="orderBase.jobTypeName"></span></p>
+  			<p>维修类型：<span ng-bind="orderBase.repairTypeName"></span></p>
+  			<p>车牌号：<span ng-bind="orderBase.carLicense"></span> <a ng-href="#/workOrder/{{orderBase.carLicense}}" class="seachWorkOrder">导入工单查询</a></p>
+  			<p>车辆类型：<span ng-bind="orderBase.operationType"></span></p>
+  			<p>上次保养里程：<span ng-bind="orderBase.lastMaintenanceMileage"></span>KM</p>
+  			<p>上次进厂里程：<span ng-bind="orderBase.lastMileage"></span>KM</p>
+        <p>进厂里程：{{orderBase.mileage}}KM <span>（本次保养合理区间{{orderBase.lastMaintenanceMileage+9700}}km-{{orderBase.lastMaintenanceMileage+10300}}km）</span></p>
+  			<p>服务门店：<span ng-bind="orderBase.partyName"></span></p>
+  			<p class="detail_content_phone" ng-click="callPhone('{{orderBase.partyPhone}}')">
+  				门店电话：
+  				<span class="review_list_price">{{orderBase.partyPhone}}</span>
+  				<i class="review_list_price icon ion-ios-telephone-outline"></i>
+  			</p>
+        <p ng-if="orderBase.refuseNote!=''">驳回原因：<span ng-bind="orderBase.refuseNote"></span></p>
+  			<p>备注：<span ng-bind="orderBase.note"></span></p>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>基本信息</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border">
+  			<p>工单号：<span ng-bind="orderBase.code"></span></p>
+  			<p>进厂时间：<span ng-bind="orderBase.createTime"></span></p>
+  			<p>工单状态：<span ng-bind="orderBase.statusName"></span></p>
+  			<p>车型：<span ng-bind="orderBase.carModelName"></span></p>
+  			<p>送修人姓名：<span ng-bind="orderBase.sendPeopleName"></span></p>
+  			<p class="detail_content_phone">
+  				送修人电话：
+  				<span class="review_list_price" ng-bind="orderBase.sendPeoplePhone"></span>
+  				<i class="review_list_price icon ion-ios-telephone-outline"></i>
+  			</p>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修项目</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div ng-if="projectList.length == 0" style="padding: 10px;">
+  			暂无数据~~
+  		</div>
+  		<div class="review_list_content no-border no-padding">
+  			<!--{{projectList}}-->
+  			<div ng-repeat="data in projectList"  class="color-font-{{data.changeType}}">
+	  			<div class="maintenance_items" ng-click="projectEvent(data.serviceProjectId)">
+            <span class="item_inde" ng-bind="data.projectIndex"></span>
+	  				<p>
+	  					<span ng-bind="data.projectName"></span>
+	  					<br />
+	  					<span>工时：<span ng-bind="data.projectManHour"></span></span>
+	  				</p>
+	  				<p>
+	  					<span>单价：<span class="review_list_price">¥<span ng-bind="data.projectUpUnitPrice"></span></span></span>
+	  					<br />
+	  					<span>工时费：<span class="review_list_price">¥<span ng-bind="data.projectUpUnitTotalMoney"></span></span></span>
+	  				</p>
+            <span class="shoopingType">{{data.purchaseTypeCN}}</span>
+	  			</div>
+	  			<div class="maintenance_items_hr"></div>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修材料</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div ng-if="goodsList.length == 0" style="padding: 10px;">
+  			暂无数据~~
+  		</div>
+  		<div class="review_list_content no-border no-padding">
+  			<div ng-repeat="data in goodsList"  class="color-font-{{data.changeType}}" >
+  				<div class="maintenance_items_padding">
+  					<span class="maintenance_name">{{data.goodsName}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.goodsBrandName}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.goodsStyle}}</span>
+  				</div>
+  				<div class="maintenance_items_padding">
+  					<span>数量：{{data.quantity}}</span>&nbsp;&nbsp;&nbsp;&nbsp;单价：{{data.unitPrice}}&nbsp;&nbsp;&nbsp;&nbsp;金额：{{data.totalMoney}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  					<span>{{data.purchaseTypeCN}}</span>
+  				</div>
+	  			<div class="maintenance_items_hr"></div>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>图片</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div ng-if="imageList[0] == null" style="padding: 10px;">
+  			暂无图片~~
+  		</div>
+  		<div class="review_list_content no-border review_list_img_wrap">
+  			<!--<div class="review_list_img" ng-repeat="data in imageList">
+  				<img src="{{data.imgUrl}}"/>
+          <p ng-bind="data.imgNote"></p>
+  			</div>-->
+        <!--<img ng-click="showBigImage('../www/img/ben.png')" src="../www/img/ben.png" width="50" height="50" />-->
+        <!--<img ng-click="showBigImage('../www/img/ben.png')" src="../www/img/ben.png" width="50" height="50" />-->
+        <div class="review_list_img" ng-repeat="data in imageList track by $index">
+          <img src="{{data.imgUrl}}" ng-click="showBigImage('{{data.imgUrl}}','{{data.imgNote}}')" ng-if="data.imgUrl!=null"/>
+          <p class="textAlignCenter" ng-bind="data.imgNote"></p>
+        </div>
+
+
+  		</div>
+  	</div>
+  	<!--<ion-list class="operation_log">
+  		<a href="#/operation_log/{{orderBase.orderId}}">
+  			<ion-item>
+		    	<span>操作日志</span>
+		    	<span class="ion-ios-arrow-right"></span>
+		  	</ion-item>
+  		</a>
+		</ion-list>-->
+    <div class="review_list">
+      <a href="#/operation_log/{{orderBase.orderId}}">
+        <ul class="review_list_title">
+          <li class="review_list_header">
+            <p>操作日志</p>
+            <p><span class="ion-ios-arrow-right"></span></p>
+          </li>
+        </ul>
+      </a>
+    </div>
+		<div class="review_list">
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items">
+  				<p>
+  					<span>代办费：<span class="review_list_price">¥{{orderBase.agencyFee}}</span></span>
+  				</p>
+  				<p>
+  					<span>检测费：<span class="review_list_price">¥{{orderBase.testingFee}}</span></span>
+  				</p>
+  			</div>
+  			<!--<div class="maintenance_items_hr"></div>-->
+  			<div class="maintenance_items paddingTop0">
+  				<p>
+  					<span>拖车费：<span class="review_list_price">¥{{orderBase.towingFee}}</span></span>
+  				</p>
+  				<p>
+  					<span>其他费：<span class="review_list_price">¥{{orderBase.otherFee}}</span></span>
+  				</p>
+  			</div>
+  		</div>
+  	</div>
+  </ion-content>
+  <com-image-box></com-image-box>
+  <div class="footer_bars">
+		<p>总计：<span class="review_list_price">¥<span ng-bind="orderBase.totalMoney"></span></span></p>
+		<a href="#/turn_down/{{orderBase.orderId}}/{{orderBase.code}}/{{orderBase.carLicense}}/{{orderBase.partyName}}/{{flag}}/002">
+			<button class="button button-outline review_list_btn_turnDown review_list_btn">驳回</button>
+		</a>
+		<a href="">
+			<button class="button button-outline review_list_btn_confrim review_list_btn" ng-click="confirm(orderBase.orderId)">确认</button>
+		</a>
+	</div>
+</ion-view>

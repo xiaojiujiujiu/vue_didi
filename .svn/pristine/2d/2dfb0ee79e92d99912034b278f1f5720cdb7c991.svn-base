@@ -1,0 +1,148 @@
+<ion-view view-title="上传照片">
+  <ion-content class="detail_content">
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>图片</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border review_list_img_wrap">
+  			<div class="review_list_img">
+  				<img src="../www/img/adam.jpg"/>
+  			</div>
+  			<div class="review_list_img">
+  				<img src="../www/img/adam.jpg"/>
+  			</div>
+  			<div class="review_list_img">
+  				<img src="../www/img/adam.jpg"/>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>基本信息</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border">
+  			<p>工单号：WXD201705009</p>
+  			<p>进厂时间：2017/05/12 08:00</p>
+  			<p>工单状态：待审核</p>
+  			<p>车型：<span>进口宝马 E61 525d 2010款 3.0T AT N57D3</span></p>
+  			<p>送修人姓名：周先生</p>
+  			<p class="detail_content_phone">
+  				送修人电话：
+  				<span class="review_list_price">010-10000000</span>
+  				<i class="icon iconfont icon-mima icon-dianhua-copy"></i>
+  			</p>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修项目</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items">
+  				<p>
+  					<span>四轮定位</span>
+  					<br />
+  					<span>工时：2</span>
+  				</p>
+  				<p>
+  					<span>单价：<span class="review_list_price">¥200.00</span></span>
+  					<br />
+  					<span>工时费：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  			</div>
+  			<div class="maintenance_items_hr"></div>
+  			<div class="maintenance_items">
+  				<p>
+  					<span>更换刹车片</span>
+  					<br />
+  					<span>工时：2</span>
+  				</p>
+  				<p>
+  					<span>单价：<span class="review_list_price">¥200.00</span></span>
+  					<br />
+  					<span>工时费：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  			</div>
+  			<div class="maintenance_items_hr"></div>
+  			<div class="maintenance_items">
+  				<p>
+  					<span>更换轮胎</span>
+  					<br />
+  					<span>工时：2</span>
+  				</p>
+  				<p>
+  					<span>单价：<span class="review_list_price">¥200.00</span></span>
+  					<br />
+  					<span>工时费：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修材料</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items">
+  				<p>
+  					<span>博世刹车片&nbsp;&nbsp;&nbsp;&nbsp;X1</span>
+  					<br />
+  					<span>单价：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  				<p>
+  					<span>规格型号：6546666</span>
+  					<br />
+  					<span>金额：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  			</div>
+  			<div class="maintenance_items_hr"></div>
+  			<div class="maintenance_items">
+  				<p>
+  					<span>嘉实多机油&nbsp;&nbsp;&nbsp;&nbsp;X1</span>
+  					<br />
+  					<span>单价：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  				<p>
+  					<span>规格型号：6546666</span>
+  					<br />
+  					<span>金额：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  			</div>
+  			<div class="maintenance_items_hr"></div>
+  			<div class="maintenance_items">
+  				<p>
+  					<span>米其林轮胎&nbsp;&nbsp;&nbsp;&nbsp;X1</span>
+  					<br />
+  					<span>单价：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  				<p>
+  					<span>规格型号：6546666</span>
+  					<br />
+  					<span>金额：<span class="review_list_price">¥200.00</span></span>
+  				</p>
+  			</div>
+  		</div>
+  	</div>
+  	
+  	
+		
+  </ion-content>
+  <div class="footer_bars">
+		<p>总计：<span class="review_list_price">¥2000.00</span></p>
+		<a href="">
+			<button class="button button-outline review_list_btn_turnDown review_list_btn">提交审核</button>
+		</a>
+	</div>
+</ion-view>

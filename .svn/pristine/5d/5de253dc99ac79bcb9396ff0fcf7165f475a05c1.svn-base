@@ -1,0 +1,18 @@
+<ion-view view-title="驳回原因">
+  <ion-content>
+  	<div class="review_list marginTop0">
+  		<div class="review_list_content no-border">
+  			<p>单号：<span ng-bind="turnDownList.code"></span></p>
+  			<p>车牌号：<span ng-bind="turnDownList.carLicense"></span></p>
+  			<p>服务门店：<span ng-bind="turnDownList.createTime"></span></p>
+  		</div>
+  	</div>
+  	<div class="turn_down_wrap">
+  		<textarea id="textArea" ng-keyup="strLength()" class="turn_down_textarea" ng-model="turnDownList.refuseNote" maxlength="200"></textarea>
+  		<p>{{refuseNoteLen}}/200</p>
+  	</div>
+  	<div class="login_submit_btn">
+  		<button type="submit" class="button button-block button-light button-positive" ng-click="saveTurn()">保存</button>
+  	</div>
+  </ion-content>
+</ion-view>

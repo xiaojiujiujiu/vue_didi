@@ -1,0 +1,162 @@
+<ion-view view-title="{{title}}">
+  <form name="form1" ng-submit="upImgSave()">
+  <ion-content class="detail_content">
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>图片</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div id="myImgs" class="review_list_content no-border review_list_img_wrap">
+        <div class="review_list_img">
+          <img src="{{img0}}" ng-click='choosePicMenu1(0)'/>
+          <!--<img src="../www/img/addimg.png"/>-->
+          <p>进店车照</p>
+        </div>
+        <div class="review_list_img" >
+          <img src="{{img1}}" ng-click='choosePicMenu1(1)'/>
+          <!--<img src="../www/img/addimg.png"/>-->
+          <p>里程表照</p>
+        </div>
+        <div class="review_list_img" ng-show="imgList.operationStatus!='001'">
+          <img src="{{img2}}" ng-click='choosePicMenu1(2)'/>
+          <!--<p ng-if="imageList[2]!=null" ng-bind="imageList[2].imgNote"></p>-->
+          <!--<img src="../www/img/addimg.png"/>-->
+          <p>完工签字照</p>
+        </div>
+        <div class="review_list_img" ng-repeat="item in upArray">
+          <img src="{{item.imgUrl}}" ng-click='choosePicMenu($index)'/>
+          <p>
+						<input name='otherNote' type='text' ng-model='item.imgNote' ng-blur="checkText($index)" />
+					</p>
+					<i class='icon ion-android-cancel' ng-click='removeImg($index, item.imgNumber)'></i>
+        </div>
+        <div id="newImgBtn" class="review_list_img" >
+          <img src="../www/img/addimg.png" ng-click="addImg()"/>
+        </div>
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>基本信息</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border">
+  			<p>工单号：<span ng-bind="orderBase.code"></span></p>
+  			<p>进厂时间：<span ng-bind="orderBase.createTime"></span></p>
+  			<p>工单状态：<span ng-bind="orderBase.statusName"></span></p>
+  			<p>车型：<span ng-bind="orderBase.carModelName"></span></p>
+  			<p>工单类别：<span ng-bind="orderBase.jobTypeName"></span></p>
+        <p>维修类别：<span ng-bind="orderBase.repairTypeName"></span></p>
+        <p>车牌号：<span ng-bind="orderBase.carLicense"></span></p>
+        <p>车辆类型：<span>{{orderBase.operationType}}</span></p>
+        <p>上次保养里程：<span ng-bind="orderBase.lastMaintenanceMileage"></span>KM</p>
+        <p>上次进厂里程：<span ng-bind="orderBase.lastMileage"></span>KM</p>
+        <p>进厂里程：<span ng-bind="orderBase.mileage"></span>KM</p>
+
+  			<!--<p class="detail_content_phone">-->
+  				<!--送修人电话：-->
+  				<!--<span class="review_list_price" ng-bind="">010-10000000</span>-->
+  				<!--<i class="icon iconfont icon-mima icon-dianhua-copy"></i>-->
+  			<!--</p>-->
+  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修项目</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+
+			<div class="review_list_content no-border no-padding">
+	  			<div ng-repeat="data in projectList"  class="color-font-{{data.changeType}}">
+		  			<div class="maintenance_items">
+		  				<p>
+                <span class="">{{$index+1}}</span>
+		  					<span ng-bind="data.projectName"></span>
+		  				</p>
+		  				<p>
+		  					<span>工时费：<span class="review_list_price">¥<span ng-bind="data.projectUnitTotalMoney"></span></span></span>
+		  				</p>
+		  			</div>
+		  			<div class="maintenance_items_hr"></div>
+	  			</div>
+	  			<div>
+		  			<p class="review_list_price subtotal">小计：¥ {{projectPrice}}</p>
+		  		</div>
+	  		</div>
+  	</div>
+  	<div class="review_list">
+  		<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>维修材料</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items" ng-repeat="data in goodsList" style="display: block;">
+  				<div class="maintenance_items_padding">
+  					<span class="maintenance_name">{{data.goodsName}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.goodsBrandName}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.goodsStyle}}</span>
+  				</div>
+  				<div class="maintenance_items_padding">
+  					<span class="maintenance_name">单价：{{data.goodsUnitPrice}}&nbsp;&nbsp;&nbsp;&nbsp;数量：{{data.goodsNumber}}&nbsp;&nbsp;&nbsp;&nbsp;金额：{{data.totalMoney}}</span>
+  				</div>
+  				<div class="maintenance_items_hr"></div>
+
+  			</div>
+					<div>
+		  			<p class="review_list_price subtotal">小计：¥ {{goodsPrice}}</p>
+		  		</div>
+
+  		</div>
+  	</div>
+		<div class="review_list">
+			<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<p>附加费用</p>
+  				<p><span class="ion-ios-arrow-down"></span></p>
+  			</li>
+  		</ul>
+  		<div class="review_list_content no-border no-padding">
+  			<div class="maintenance_items">
+  				<p>
+  					<span>代办费：<span class="review_list_price">¥{{otherPrice.agencyFee}}</span></span>
+  				</p>
+  				<p>
+  					<span>检测费：<span class="review_list_price">¥{{otherPrice.testingFee}}</span></span>
+  				</p>
+  			</div>
+  			<!--<div class="maintenance_items_hr"></div>-->
+  			<div class="maintenance_items paddingTop0">
+  				<p>
+  					<span>拖车费：<span class="review_list_price">¥{{otherPrice.towingFee}}</span></span>
+  				</p>
+  				<p>
+  					<span>其他费：<span class="review_list_price">¥{{otherPrice.otherFee}}</span></span>
+  				</p>
+  			</div>
+  		</div>
+  		<div>
+		  			<p class="review_list_price subtotal">小计：¥ {{	otherPriceSubtotal}}</p>
+		  		</div>
+  	</div>
+
+
+  </ion-content>
+  <div class="PriceDetails" ng-show="PriceDetails">
+  	<p>费用合计：<span class="review_list_price">¥{{orderBase.totalMoney}}</span>
+  		 = 工时费：<span class="review_list_price">¥{{projectPrice}}</span> +
+  		 材料费：<span class="review_list_price">¥{{goodsPrice}}</span> +
+  		 附加费用：<span class="review_list_price">¥{{otherPrice.agencyFee * 1 + otherPrice.testingFee * 1 + otherPrice.towingFee * 1 + otherPrice.otherFee * 1}}</span>
+  	</p>
+  </div>
+  <div class="footer_bars">
+		<p ng-click="showPriceDetails()">总计：<span class="review_list_price">¥{{orderBase.totalMoney}}</span><i ng-class="PriceDetailsClassName"></i></p>
+		<button type="submit" class="button button-outline review_list_btn_turnDown review_list_btn">{{saveBtn}}</button>
+	</div>
+  </form>
+</ion-view>

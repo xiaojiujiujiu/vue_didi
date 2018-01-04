@@ -1,0 +1,38 @@
+<ion-view view-title="接车登记">
+	<ion-nav-title>
+    <div class="bar bar-header item-input-inset title no_border">
+    	 <form action="javascript:return true;">       
+            <label class="item-input-wrapper stock_header">
+	            <i class="icon ion-ios-search placeholder-icon search_input_icon"></i>
+	            <input placeholder="请输入材料名称搜索" class="stock_header_input">	        
+	            <i class="icon ion-ios-mic-outline stock_header_right"></i>
+	        </label>
+        </form>
+    </div>
+  </ion-nav-title>
+  <ion-content>
+  	<div class="stock_connect_list_top_pro">
+  		<i class="icon ion-ios-checkmark stock_connect_list_top_left_pro"></i>
+  		<p class="stock_connect_list_top_center_pro">安装火花塞</p>
+  		<p class="stock_connect_right_pro">￥100.00</p>
+  	</div>
+  	<div class="stock_connect_list">
+  		<i class="icon ion-ios-circle-outline stock_connect_list_left"></i>
+  		<p class="stock_connect_list_center">安装轮胎</p>
+  		<p class="stock_connect_list_right_pro">￥100.00</p>
+  	</div>
+  	<div class="stock_list">
+  		<i class="icon ion-ios-circle-outline stock_list_left"></i>
+  		<p class="stock_list_center">安装玻璃</p>
+  		<p class="stock_list_right_pro">￥100.00</p>
+  	</div>
+  	<div class="stock_connect_bottom">
+  		<i class="icon ion-ios-circle-outline stock_connect_list_left"></i>
+  		<p class="stock_connect_list_center">安装导航</p>
+  		<p class="stock_connect_list_right_pro">￥100.00</p>
+  	</div>
+  </ion-content>
+  <div class="bar bar-footer">
+      <div class="title">确认</div>
+  </div>
+</ion-view>

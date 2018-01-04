@@ -1,0 +1,52 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header item-input-inset title no_border">
+    	<form action="javascript:return true;">
+            <label class="item-input-wrapper search_input_wrap">
+	            <i class="icon ion-ios-search placeholder-icon search_input_icon"></i>
+	            <input type="search" placeholder="请输入店铺名称/车牌号" ng-model="sendParam.didiKeyWord" ng-keypress="seachList($event)" class="search_input">
+	        </label>
+        </form>
+    </div>
+  </ion-nav-title>
+  <ion-content>
+  	<div class="review_list" ng-repeat="item in repairs">
+  		<ul class="review_list_title">
+  			<li>
+  				<p>单号：{{item.code}}</p>
+
+  			</li>
+  		</ul>
+  		<a href="#/order_detail/{{item.orderId}}/2">
+	  		<div class="review_list_content">
+	  			<p>车牌号：{{item.carLicense}}</p>
+	  			<p>进厂时间：{{item.createTime}}</p>
+	  			<p>服务门店：{{item.partyName}}</p>
+	  			<p>车型：{{item.carModelName}}</p>
+	  			<p>工单类型：{{item.jobTypeName}}</p>
+	  			<p>维修类型：{{item.repairTypeName}}</p>
+	  			<p>进厂里程：{{item.mileage}}KM</p>
+	  			<p>总费用：<span class="review_list_price">¥{{item.upTotalMoney}}</span></p>
+	  		</div>
+  		</a>
+  		<div class="review_list_btnWrap">
+  			<a href="#/M_history/{{item.carVin}}/1">
+  				<button class="button button-outline review_list_btn_history review_list_btn">维保历史</button>
+  			</a>
+  			<a href="#/turn_down/{{item.orderId}}/{{item.code}}/{{item.carLicense}}/{{item.partyName}}/2/001">
+  				<button class="button button-outline review_list_btn_confrim review_list_btn">驳回</button>
+  			</a>
+  			<a href="" ng-click="confirm({{item.orderId}})">
+  				<button class="button button-outline review_list_btn_confrim review_list_btn">确认</button>
+  			</a>
+  		</div>
+  	</div>
+  	<ion-infinite-scroll on-infinite="loadMore()" ng-if="isLoad" distance="1%"></ion-infinite-scroll>
+    <div class="frm_visit_no" ng-show="repairCar">
+      <div class="col text_center index_no_visitPlan">
+        <span class="icon-salesman_15 index_icon_visitPlan"></span>
+        <p>没有更多数据</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

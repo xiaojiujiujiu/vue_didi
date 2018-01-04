@@ -1,0 +1,139 @@
+<ion-view view-title="首页">
+  <ion-content class="store_index_content" scroll="false">
+
+  	<!--<div class="index_banner">-->
+  		<!--<img src="../www/img/banner1.jpg"/>-->
+  	<!--</div>-->
+    <div class="index_orderList">
+    	<ul class="review_list_title">
+  			<li class="review_list_header">
+  				<a ng-click="goOrder(100)">
+  					<p>工单列表</p>
+  					<p><span class="ion-ios-arrow-right"></span></p>
+  				</a>
+  			</li>
+  		</ul>
+  		<div class="row">
+  			<a class="col" ng-click="goOrder(110)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.createNum > 0">{{indexNum.statusCount.createNum}}</span><!-- -->
+	      		<img src="../www/img/1.png" alt="" />
+	        	<div>已创建</div>
+		      </div>
+	      </a>
+	      <a class="col" ng-click="goOrder(120)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.check1Num > 0">{{indexNum.statusCount.check1Num}}</span><!-- -->
+	      		<img src="../www/img/2.png" alt="" />
+	        	<div>待审核</div>
+		      </div>
+	      </a>
+	      <a class="col" ng-click="goOrder(140)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.dispatchNum > 0">{{indexNum.statusCount.dispatchNum}}</span><!-- -->
+		      	<img src="../www/img/3.png" alt="" />
+		        <div>待派工</div>
+		      </div>
+	      </a>
+	      <a class="col" ng-click="goOrder(150)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.workNum > 0">{{indexNum.statusCount.workNum}}</span><!-- -->
+		      	<img src="../www/img/4.png" alt="" />
+		        <div>待完工</div>
+		      </div>
+	      </a>
+	    </div>
+	    <div class="row">
+	    	<a class="col" ng-click="goOrder(155)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.overNum > 0">{{indexNum.statusCount.overNum}}</span><!-- -->
+		      	<img src="../www/img/5.png" alt="" />
+		        <div>已完工</div>
+		      </div>
+	      </a>
+	      <a class="col" ng-click="goOrder(160)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.check2Num > 0">{{indexNum.statusCount.check2Num}}</span><!-- -->
+		      	<img src="../www/img/6.png" alt="" />
+		        <div>待总检</div>
+		      </div>
+	      </a>
+	      <a class="col" ng-click="goOrder(130)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.cancelNum > 0">{{indexNum.statusCount.cancelNum}}</span><!-- -->
+		      	<img src="../www/img/7.png" alt="" />
+		        <div>已驳回</div>
+		      </div>
+	      </a>
+	      <a class="col" ng-click="goOrder(170)">
+		      <div class="order_list_box">
+		      	<span class="index_num" ng-if="indexNum.statusCount.exceptionNum > 0">{{indexNum.statusCount.exceptionNum}}</span>
+		      	<img src="../www/img/8.png" alt="" />
+		        <div>异常单</div>
+		      </div>
+	      </a>
+	    </div>
+    </div>
+    <div class="row index_orderList_log border-btm" style="background: #fff;">
+      <a class="col border0 ">
+      	<div href="javascript: void(0)"  class="col_wk_box">
+        	<div>
+        		<!--<p>
+        			<span ng-if="indexNum.B2BWaitPayNumber != 0" class="fontRed">{{indexNum.B2BWaitPayNumber}}</span>
+        			<span ng-if="indexNum.B2BWaitPayNumber == 0">{{indexNum.B2BWaitPayNumber}}</span>
+        		</p>
+        		<p>商城待支付订单</p>-->
+        		您还有（<span ng-if="indexNum.B2BWaitPayNumber != 0" class="fontRed">{{indexNum.B2BWaitPayNumber}}</span><span ng-if="indexNum.B2BWaitPayNumber == 0">{{indexNum.B2BWaitPayNumber}}</span>）张商城待支付订单，请及时付款！
+        	</div>
+	      </div>
+      </a>
+    </div>
+    <div class="index_orderList">
+    	<div class="row index_orderList_log">
+	    	<a href="#/M_historySearch" class="col no_border">
+	      	<div href="" class="col_wk_box index_orderList_br">
+	      		<i class="icon iconfont icon-lishi"></i>
+	        	<div>
+	        		<p class="index_MHistory">维保历史</p>
+	        	</div>
+	        </div>
+	      </a>
+	      <a class="col no_border">
+	      	<div href="javascript: void(0)"  class="col_wk_box">
+		      	<i class="icon iconfont icon-yuyue"></i>
+	        	<div>
+	        		<p><span>{{indexNum.todayReserveOrderNum}}</span> 次</p>
+	        		<p>当天预约</p>
+	        	</div>
+		      </div>
+	      </a>
+	    </div>
+	    <div class="row index_orderList_log border-btm">
+	    	<a class="col border0">
+	      	<div href="javascript: void(0)" class="col_wk_box index_orderList_br">
+	      		<i class="icon iconfont icon-riqi2"></i>
+	        	<div>
+	        		<p><span>{{indexNum.todayRepairOrderNum}}</span> 次</p>
+	        		<p>当天接车</p>
+	        	</div>
+	        </div>
+	      </a>
+	      <a class="col border0 ">
+	      	<div href="javascript: void(0)" class="col_wk_box">
+		      	<i class="icon iconfont icon-yue"></i>
+	        	<div>
+	        		<p><span>{{indexNum.monthsRepairOrderNum}}</span> 次</p>
+	        		<p>当月接车</p>
+	        	</div>
+		      </div>
+	      </a>
+	    </div>
+   	</div>
+
+   	<!--<div class="index_msg">-->
+   		<!--<p><span>中驰</span>快报</p>-->
+   		<!--<p>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>-->
+   		<!--<p><i class="icon iconfont icon-laba review_list_price"></i>中驰车福、滴滴代驾上海共筑用车安全</p>-->
+   	<!--</div>-->
+  </ion-content>
+</ion-view>

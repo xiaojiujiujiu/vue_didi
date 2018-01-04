@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src https://codepush.azurewebsites.net 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />-->
+
+    <title>滴滴app</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+		<link href="css/iconfont.css" rel="stylesheet">
+    <link href="css/directiveStyle.css" rel="stylesheet">
+    <link href="css/swiper.min.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+
+    <!-- your app's js -->
+    <!--<script src="lib/plugins/swiper.min.js"></script>-->
+    <script src="lib/plugins/ocLazyLoad.min.js"></script>
+    <script src="lib/plugins/angular-cookies.min.js"></script>
+    <script src="lib/plugins/md5.js"></script>
+	  <script src="lib/plugins/base64.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services/httpServices.js"></script>
+    <script src="js/services/services.js"></script>
+    <script src="lib/plugins/ocLazyLoad.min.js"></script>
+    <script src="js/router/router.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+    	function loadExtentFile(filePath, fileType){
+		    if(fileType == "js"){
+	        var oJs = document.createElement('script');
+	        oJs.setAttribute("type","text/javascript");
+	        oJs.setAttribute("src", filePath);//文件的地址 ,可为绝对及相对路径
+	        document.getElementsByTagName("head")[0].appendChild(oJs);//绑定
+		    }else if(fileType == "css"){
+	        var oCss = document.createElement("link");
+	        oCss.setAttribute("rel", "stylesheet");
+	        oCss.setAttribute("type", "text/css");
+	        oCss.setAttribute("href", filePath);
+	        document.getElementsByTagName("head")[0].appendChild(oCss);//绑定
+		    }
+			}
+
+    	var ua = navigator.userAgent.toLowerCase();
+			if (/iphone|ipad|ipod/.test(ua)) {
+				loadExtentFile("css/ios_hack.css", "css");
+			} else if (/android/.test(ua)) {
+
+			}
+    </script>
+  </head>
+  <body ng-app="starter">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

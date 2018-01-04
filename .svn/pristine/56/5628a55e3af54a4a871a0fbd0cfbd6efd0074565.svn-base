@@ -1,0 +1,118 @@
+<ion-view view-title="" hide-nav-bar="true">
+  <style>
+    .scroll-content{ top: 40px;}
+  </style>
+  <div class="bar bar-header header">
+    <div class="h1 title">首页</div>
+    <button class="button button-clear button-positive" ng-click="goBack()" style="color:#fff;">退出</button>
+  </div>
+
+  <ion-content class="">
+    <div class="top">
+        <div class="top_center">
+          <div class="top_right">
+            <p>当前登录用户:<span ng-bind="loginInfo.userName?loginInfo.userName:'用户'"></span></p>
+          </div>
+        </div>
+    </div>
+    <div style="padding: 0 15px;">
+    	<p class="index_content_titles">公司审核</p>
+    	<div class="index_orderList">
+    		<div class="row">
+	  			<a class="col" href="#/review/170">
+			      <div class="order_list_box">
+			      	<span class="index_num1" ng-if="indexNum.didiConfirms1Count > 0">{{indexNum.didiConfirms1Count}}</span><!-- -->
+		      		<img class="i2341212312312312" src="../www/img/111.png" alt="" />
+		        	<div>公司付费</div>
+			      </div>
+		      </a>
+		      <a class="col" href="#/review/180">
+			      <div class="order_list_box">
+			      	<span class="index_num1" ng-if="indexNum.confirms1Count > 0">{{indexNum.confirms1Count}}</span><!-- -->
+			      	<img class="i2341212312312312" src="../www/img/222.png" alt="" />
+			        <div>非公司付费</div>
+			      </div>
+		      </a>
+		    </div>
+    	</div>
+    	<p class="index_content_titles">公司总检</p>
+    	<div class="index_orderList">
+    		<div class="row">
+	  			<a class="col" href="#/inspection/190">
+			      <div class="order_list_box">
+			      	<span class="index_num1" ng-if="indexNum.didiConfirms2Count > 0">{{indexNum.didiConfirms2Count}}</span><!-- -->
+		      		<img class="i2341212312312312" src="../www/img/111.png" alt="" />
+		        	<div>公司付费</div>
+			      </div>
+		      </a>
+		      <a class="col" href="#/inspection/200">
+			      <div class="order_list_box">
+			      	<span class="index_num1" ng-if="indexNum.confirms2Count > 0">{{indexNum.confirms2Count}}</span><!-- -->
+			      	<img class="i2341212312312312" src="../www/img/222.png" alt=""/>
+			        <div>非公司付费</div>
+			      </div>
+		      </a>
+		    </div>
+    	</div>
+    	<div class="index_orderList">
+    		<ul class="review_list_title">
+	  			<li class="review_list_header">
+	  				<a href="#/M_historySearch">
+	  					<p class="index_content_titles" style="padding-left: 15px;">维保历史查询</p>
+	  					<p class="index_content_titles"><span class="ion-ios-arrow-right"></span></p>
+	  				</a>
+	  			</li>
+	  		</ul>
+    	</div>
+    	<p class="index_content_titles">工单列表</p>
+	    <div class="index_orderList">
+	  		<div class="row">
+	  			<a class="col" ng-click="goOrder(110)">
+			      <div class="order_list_box">
+			      	<span class="index_num" ng-if="indexNum.statusCount.createNum > 0">{{indexNum.statusCount.createNum}}</span><!-- -->
+		      		<img src="../www/img/1.png" alt="" />
+		        	<div>已创建</div>
+			      </div>
+		      </a>
+		      <a class="col" ng-click="goOrder(120)">
+			      <div class="order_list_box">
+			      	<span class="index_num" ng-if="indexNum.statusCount.dispatchNum > 0">{{indexNum.statusCount.dispatchNum}}</span><!-- -->
+			      	<img src="../www/img/3.png" alt="" />
+			        <div>待派工</div>
+			      </div>
+		      </a>
+		      <a class="col" ng-click="goOrder(130)">
+			      <div class="order_list_box">
+			      	<span class="index_num" ng-if="indexNum.statusCount.workNum > 0">{{indexNum.statusCount.workNum}}</span><!-- -->
+			      	<img src="../www/img/4.png" alt="" />
+			        <div>待完工</div>
+			      </div>
+		      </a>
+		    </div>
+		    <div class="row">
+		    	<a class="col" ng-click="goOrder(140)">
+			      <div class="order_list_box">
+			      	<span class="index_num" ng-if="indexNum.statusCount.overNum > 0">{{indexNum.statusCount.overNum}}</span><!-- -->
+			      	<img src="../www/img/5.png" alt="" />
+			        <div>已完工</div>
+			      </div>
+		      </a>
+		      <a class="col" ng-click="goOrder(150)">
+			      <div class="order_list_box">
+			      	<span class="index_num" ng-if="indexNum.statusCount.cancelNum > 0">{{indexNum.statusCount.cancelNum}}</span><!-- -->
+			      	<img src="../www/img/7.png" alt="" />
+			        <div>已驳回</div>
+			      </div>
+		      </a>
+		      <a class="col" ng-click="goOrder(160)">
+			      <div class="order_list_box">
+			      	<span class="index_num" ng-if="indexNum.statusCount.exceptionNum > 0">{{indexNum.statusCount.exceptionNum}}</span>
+			      	<img src="../www/img/8.png" alt="" />
+			        <div>异常单</div>
+			      </div>
+		      </a>
+		    </div>
+	    </div>
+    </div>
+  </ion-content>
+</ion-view>

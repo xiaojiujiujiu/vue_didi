@@ -1,0 +1,58 @@
+ <ion-view>
+ 	<ion-nav-title>
+	    <div class="bar bar-header item-input-inset title no_border">
+	    	<form action="javascript:return true;">
+	        	<div class="h1 title">客户详情</div>
+	        </form>
+	    </div>
+   </ion-nav-title>
+    <ion-content>
+    	<div class="customer_title">
+        <p class="customer01"><span>{{customerList.carLicense}}</span><span>{{customerList.carModel}}</span></span></p>
+        <p class="customer01"><span>{{customerList.sendPeopleName}}</span><span>{{customerList.sendPeoplePhone}}</span></p>
+        <p class="customer02"><span>{{customerList.vin}}</span><span>{{customerList.operationType}}</span></p>
+	    </div>
+	    <div class="customer_top">
+        <ul class="list customer_wbls_postition">
+          <a class="db" href="#/M_history/{{customerList.carLicense}}"><li class="item billing_item"> 维保历史 <i class="icon ion-ios-arrow-right customer_wbls"></i></li></a>
+        </ul>
+			<ul class="list">
+				<li class="item billing_item"> 客户信息</li>
+			</ul>
+	    </div>
+
+        <div class="customer_connect_top" ng-if="isConsume">
+          <p>总到店<span>{{pageModol.serviceTimes}}</span>次，总消费<span>￥{{pageModol.totalMoney}}</span>元</p>
+          <p>最近一次服务历史:</p>
+          <p><span>{{pageModol.repairOrderCode}}</span>　　{{pageModol.repairOrderCreateTime}}</p>
+        </div>
+        <div class="customer_connect_top" ng-if="!isConsume">
+          <p>总到店<span>0</span>次，总消费<span>￥0.00</span>元</p>
+        </div>
+
+      <div ng-if="isConsume">
+        <div class="customer_connect" ng-if="pageModol.repairOrderProjectArray.length!=0">
+          <h5>维修项目</h5>
+          <p ng-repeat="data in pageModol.repairOrderProjectArray">{{data.projectName}} {{data.ProjectUserNameStr}}</p>
+        </div>
+        <div class="customer_connect" ng-if="pageModol.repairOrderGoodsArray.length!=0">
+          <h5>维修材料</h5>
+          <p ng-repeat="data in pageModol.repairOrderGoodsArray">{{data.goodsName}}{{data.goodsBrandName}}{{data.goodsStyle}}</p>
+        </div>
+        <div class="customer_connect_bottom">
+          <p>总费用：<span>￥{{pageModol.totalMoney}}</span></p>
+        </div>
+        <div class="customer_bottom">
+          <p>距离上次保养已经 <span ng-bind="pageModol.time"></span> 天了</p>
+          <dl>
+            <dt><img src="./img/contact_03.png"/></dt>
+            <dd><a ng-click="callPhone(customerList.sendPeoplePhone)">联系客户</a></dd>
+          </dl>
+        </div>
+
+      </div>
+
+
+  </ion-content>
+</ion-view>
+

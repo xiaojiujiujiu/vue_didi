@@ -1,0 +1,42 @@
+<!--<ion-view hide-back-button="true">-->
+  <!--<ion-nav-title>-->
+    <!--<div class="bar bar-header header">-->
+      <!--<button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>-->
+      <!--<h1 class="title ios_title">维保历史</h1>-->
+
+    <!--</div>-->
+  <!--</ion-nav-title>-->
+<ion-view view-title="维保历史">
+  <ion-content>
+  	<div class="review_list marginTop0">
+  		<div class="review_list_content no-border">
+  			<p>车牌号：{{MHistoryResult.carLicense}}</p>
+  			<p>VIN码：{{MHistoryResult.carVin}}</p>
+  			<p>车型：{{MHistoryResult.carCarModelName}}</p>
+  		</div>
+  	</div>
+  	<div class="review_list" ng-repeat="item in repairs">
+  		<ul class="review_list_title">
+  			<li>
+  				<p>单号：{{item.code}}</p>
+  			</li>
+  		</ul>
+  		<a href="#/M_history_detail/{{item.orderId}}/2">
+	  		<div class="review_list_content no-border">
+	  			<p>进厂时间：{{item.createTime}}</p>
+	  			<p>服务门店：{{item.partyName}}</p>
+	  			<p>工单类型：{{item.jobTypeName}}</p>
+	  			<p>维修类型：{{item.repairTypeName}}</p>
+	  			<p>进厂里程：{{item.mileage}}KM</p>
+	  		</div>
+  		</a>
+  	</div>
+  	<ion-infinite-scroll on-infinite="loadMore()" ng-if="isLoad" distance="1%"></ion-infinite-scroll>
+    <div class="frm_visit_no" ng-show="repairCar">
+      <div class="col text_center index_no_visitPlan">
+        <span class="icon-salesman_15 index_icon_visitPlan"></span>
+        <p>没有更多数据</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

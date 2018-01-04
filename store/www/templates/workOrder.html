@@ -1,0 +1,28 @@
+<ion-view hide-back-button="true">
+  <ion-nav-title>
+    <div class="bar bar-header header">
+      <button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>
+      <h1 class="title ios_title">导入工单查询</h1>
+    </div>
+  </ion-nav-title>
+  <ion-content class="detail_content">
+    <div class="review_list">
+      <!--<div class="review_list_content no-border">-->
+        <p>车牌号：<span ng-bind="workOrderList.commonData.carLicense"></span></p>
+        <p>车型：<span ng-bind="workOrderList.commonData.carModel"></span></p>
+    </div>
+    <div ng-if="workOrderList.diRepairCarInfoHistoryArray.length!=0" class="workList">
+      <div class="theStore" ng-repeat="data in workOrderList.diRepairCarInfoHistoryArray">
+        <p>到店时间：<span ng-bind="data.arriveDate"></span>　　　<span>离店时间:{{data.leaveDate}}</span></p>
+        <p>维保项目：<span ng-bind="data.repairProject"></span></p>
+        <p>到店里程数：<span ng-bind="data.mileage"></span>KM</p>
+        <p>维保金额：<span ng-bind="data.totalMoney"></span></p>
+        <p>保养次数：<span ng-bind="data.maintainCount"></span></p>
+      </div>
+    </div>
+    <div class="noWorkData" ng-if="workOrderList.diRepairCarInfoHistoryArray==0">
+      <p>暂无数据</p>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,24 @@
+<ion-view>
+	<ion-nav-title>
+	    <div class="bar bar-header header item-input-inset no_border">
+	    	<button class="button button-clear button-positive drop_out" ng-click="goBack()"><i class="icon ion-ios-arrow-left"></i></button>
+			<h1 class="title ios_title">维保历史查询</h1>
+	    </div>
+    </ion-nav-title>
+  <ion-content id="content">
+  	<div class="search_MHistory">
+  		<!--<label for="">VIN码&nbsp;&nbsp;</label>-->
+    	<input id="searchTxt" ng-model="searchTxt" type="text" ng-change="fuzzyQuery(searchTxt)" placeholder="请输入车牌号"/>
+  	</div>
+  	<div class="search_history_list" ng-show="searchHistoryList">
+		<ion-scroll scrollbar-x="true" direction="y" class="search_history_list_scroll">
+			<ul>
+				<li ng-repeat="items in searchCarLicense" ng-click="searchCarLicenseEvent(items)">{{items}}</li>
+			</ul>
+	    </ion-scroll>
+	</div>
+  	<div class="login_submit_btn">
+  		<button ng-click="search(searchTxt)" class="button button-block button-light button-positive">查询</button>
+  	</div>
+  </ion-content>
+</ion-view>

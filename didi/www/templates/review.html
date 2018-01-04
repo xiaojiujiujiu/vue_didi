@@ -1,0 +1,81 @@
+<ion-view>
+	<ion-nav-title>
+    <div class="bar bar-header item-input-inset title no_border">
+    	 <form action="javascript:return true;">
+            <label class="item-input-wrapper search_input_wrap">
+	            <i class="icon ion-ios-search placeholder-icon search_input_icon"></i>
+	            <input id="keyword" type="search" ng-keypress="seachList($event)" placeholder="请输入店铺名称/车牌号" ng-model="reviewList.didiKeyWord" class="search_input">
+	        </label>
+        </form>
+    </div>
+  </ion-nav-title>
+  <ion-content style="padding-top: 0px;">
+  	<div class="review_list" ng-repeat="data in repairs">
+  		<ul class="review_list_title">
+  			<li>
+  				<p>单号：<span ng-bind="data.code"></span></p>
+  			</li>
+  		</ul>
+  		<a href="#/order_detail/{{data.orderId}}/1">
+  			<div class="review_list_content">
+	  			<p>车牌号：<span ng-bind="data.carLicense"></span></p>
+	  			<p>进厂时间：<span ng-bind="data.createTime"></span></p>
+	  			<p>服务门店：{{data.partyName}}</p>
+	  			<p>车型：<span ng-bind="data.carModelName"></span></p>
+	  			<p>工单类型：<span ng-bind="data.jobTypeName"></span></p>
+	  			<p>维修类型：<span ng-bind="data.repairTypeName"></span></p>
+	  			<p>进厂里程：<span ng-bind="data.mileage"></span>KM</p>
+	  			<p>总费用：<span class="review_list_price" ng-bind="data.upTotalMoney"><i>¥</i>200.00</span></p>
+	  		</div>
+  		</a>
+  		<div class="review_list_btnWrap">
+  			<a href="#/M_history/{{data.carVin}}/1">
+  				<button class="button button-outline review_list_btn_history review_list_btn">维保历史</button>
+  			</a>
+  			<a href="#/turn_down/{{data.orderId}}/{{data.code}}/{{data.carLicense}}/{{data.partyName}}/1/001">
+  				<button class="button button-outline review_list_btn_confrim review_list_btn">驳回</button>
+  			</a>
+  			<a>
+  				<button class="button button-outline review_list_btn_confrim review_list_btn" ng-click="confirm(data.orderId)">确认</button>
+  			</a>
+  		</div>
+  	</div>
+  	<!--<div class="review_list">-->
+  		<!--<ul class="review_list_title">-->
+  			<!--<li>-->
+  				<!--<p>单号：78454684</p>-->
+  				<!--<p>滴滴XXXXXX店</p>-->
+  			<!--</li>-->
+  		<!--</ul>-->
+  		<!--<a href="#/order_detail">-->
+  			<!--<div class="review_list_content">-->
+	  			<!--<p>车牌号：京FJASDD</p>-->
+	  			<!--<p>服务时间：2017.02.01 12:00</p>-->
+	  			<!--<p>车型：进口宝马 E61 525d 2010款 3.0T AT</p>-->
+	  			<!--<p>工单类型：保养类滴滴付费</p>-->
+	  			<!--<p>维修类型：常规保养</p>-->
+	  			<!--<p>进厂里程：1000KM</p>-->
+	  			<!--<p>总费用：<span class="review_list_price">¥200.00</span></p>-->
+	  		<!--</div>-->
+  		<!--</a>-->
+  		<!--<div class="review_list_btnWrap">-->
+  			<!--<a href="#/M_history">-->
+  				<!--<button class="button button-outline review_list_btn_history review_list_btn">维保历史</button>-->
+  			<!--</a>-->
+  			<!--<a href="#/turn_down">-->
+  				<!--<button class="button button-outline review_list_btn_turnDown review_list_btn">驳回</button>-->
+  			<!--</a>-->
+  			<!--<a href="">-->
+  				<!--<button class="button button-outline review_list_btn_turnDown review_list_btn">确认</button>-->
+  			<!--</a>-->
+  		<!--</div>-->
+  	<!--</div>-->
+    <ion-infinite-scroll on-infinite="loadMore()" ng-if="isLoad" distance="5%"></ion-infinite-scroll>
+    <div class="frm_visit_no" ng-show="repairCar">
+      <div class="col text_center index_no_visitPlan">
+        <span class="icon-salesman_15 index_icon_visitPlan"></span>
+        <p>没有更多数据</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
